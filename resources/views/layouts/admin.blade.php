@@ -45,6 +45,22 @@
             bottom: 0;
             left: 0;
             z-index: 100;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.2);
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+        }
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,255,255,0.4);
         }
 
         .sidebar-brand {
@@ -53,6 +69,10 @@
             align-items: center;
             gap: 12px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: sticky;
+            top: 0;
+            background: var(--sidebar-bg);
+            z-index: 10;
         }
 
         .sidebar-brand img {
@@ -67,7 +87,7 @@
 
         .sidebar-menu {
             list-style: none;
-            padding: 1rem 0;
+            padding: 0.5rem 0 2rem 0;
             flex: 1;
         }
 

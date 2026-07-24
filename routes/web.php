@@ -59,6 +59,7 @@ Route::middleware(['auth', 'role:admin,reception'])->group(function () {
 // Panel Administrativo (Requiere login con rol admin)
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/pedidos', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('admin.orders.index');
 
     // Productos
     Route::get('/productos', [ProductController::class, 'index'])->name('admin.products.index');

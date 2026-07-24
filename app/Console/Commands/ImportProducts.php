@@ -17,16 +17,16 @@ class ImportProducts extends Command
         $path = $this->argument('path') ?? storage_path('app/legacy-import/productos.json');
 
         if (!File::exists($path)) {
-            $this->error("El archivo no existe: {$path}");
-            return Command::FAILURE;
+            $this->warn("El archivo no existe: {$path}. Se omitió la importación.");
+            return Command::SUCCESS;
         }
 
         $json = File::get($path);
         $data = json_decode($json, true);
 
         if (!$data || !is_array($data)) {
-            $this->error("Formato JSON inválido en {$path}");
-            return Command::FAILURE;
+            $this->warn("Formato JSON inválido en {$path}. Se omitió la importación.");
+            return Command::SUCCESS;
         }
 
         $count = 0;

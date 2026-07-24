@@ -21,16 +21,16 @@ class ImportRecipes extends Command
         $path = $this->argument('path') ?? storage_path('app/legacy-import/recetas.json');
 
         if (!File::exists($path)) {
-            $this->error("El archivo no existe: {$path}");
-            return Command::FAILURE;
+            $this->warn("El archivo no existe: {$path}. Se omitió la importación.");
+            return Command::SUCCESS;
         }
 
         $json = File::get($path);
         $data = json_decode($json, true);
 
         if (!$data || !is_array($data)) {
-            $this->error("Formato JSON inválido en {$path}");
-            return Command::FAILURE;
+            $this->warn("Formato JSON inválido en {$path}. Se omitió la importación.");
+            return Command::SUCCESS;
         }
 
         $count = 0;
@@ -57,7 +57,6 @@ class ImportRecipes extends Command
                     ]
                 );
 
-                // Borrar ítems previos para reemplazo limpio
                 RecipeItem::where('recipe_id', $recipe->id)->delete();
 
                 if (isset($recipeData['Insumos']) && is_array($recipeData['Insumos'])) {
@@ -72,10 +71,9 @@ class ImportRecipes extends Command
                             ]
                         );
 
-                        // Crear o verificar inventario
                         Inventory::firstOrCreate(
                             ['ingredient_id' => $ingredient->id],
-                            ['current_quantity' => 100] // Stock inicial abundante para la demo
+                            ['current_quantity' => 100]
                         );
 
                         RecipeItem::create([

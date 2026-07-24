@@ -1,0 +1,320 @@
+[
+  {
+    "Folio": "V260630-4230",
+    "Fecha": "2026-06-30T08:20:54.6948644-06:00",
+    "Subtotal": 0,
+    "Descuento": 0,
+    "Total": 351,
+    "Estado": "Recibido",
+    "Detalles": [
+      {
+        "Codigo": "P009",
+        "Nombre": "Limonada Mineral",
+        "PrecioUnitario": 42,
+        "Cantidad": 3,
+        "Subtotal": 126
+      },
+      {
+        "Codigo": "P014",
+        "Nombre": "S\u00E1ndwich de Pollo",
+        "PrecioUnitario": 75,
+        "Cantidad": 3,
+        "Subtotal": 225
+      }
+    ],
+    "ClienteNombre": null,
+    "ClienteCorreo": null,
+    "ClienteTelefono": null,
+    "TipoServicio": "para_llevar",
+    "MesaNumero": null,
+    "ZonaFisicaNombre": null,
+    "DireccionEntrega": null,
+    "HoraPreferida": null,
+    "NotasCliente": null,
+    "CuponCodigo": null,
+    "MetodoPago": "efectivo",
+    "EstadoPago": "pendiente",
+    "ReferenciaPago": null,
+    "QrToken": "",
+    "QrUsado": false,
+    "QrUsadoEn": null
+  },
+  {
+    "Folio": "V260630-6189",
+    "Fecha": "2026-06-30T12:16:45.6814453-06:00",
+    "Subtotal": 0,
+    "Descuento": 0,
+    "Total": 293,
+    "Estado": "Recibido",
+    "Detalles": [
+      {
+        "Codigo": "P015",
+        "Nombre": "Bagel de Jam\u00F3n y Queso",
+        "PrecioUnitario": 68,
+        "Cantidad": 1,
+        "Subtotal": 68
+      },
+      {
+        "Codigo": "P002",
+        "Nombre": "Frapp\u00E9 Moka",
+        "PrecioUnitario": 65,
+        "Cantidad": 2,
+        "Subtotal": 130
+      },
+      {
+        "Codigo": "C002",
+        "Nombre": "Antojo Sin Culpa",
+        "PrecioUnitario": 95,
+        "Cantidad": 1,
+        "Subtotal": 95
+      }
+    ],
+    "ClienteNombre": null,
+    "ClienteCorreo": null,
+    "ClienteTelefono": null,
+    "TipoServicio": "para_llevar",
+    "MesaNumero": null,
+    "ZonaFisicaNombre": null,
+    "DireccionEntrega": null,
+    "HoraPreferida": null,
+    "NotasCliente": null,
+    "CuponCodigo": null,
+    "MetodoPago": "efectivo",
+    "EstadoPago": "pendiente",
+    "ReferenciaPago": null,
+    "QrToken": "",
+    "QrUsado": false,
+    "QrUsadoEn": null
+  },
+  {
+    "Folio": "V260709-2618",
+    "Fecha": "2026-07-09T09:34:57.9002816-06:00",
+    "Subtotal": 0,
+    "Descuento": 0,
+    "Total": 35.50,
+    "Estado": "Recibido",
+    "Detalles": [
+      {
+        "Codigo": "P001",
+        "Nombre": "Caf\u00E9 Americano",
+        "PrecioUnitario": 35.50,
+        "Cantidad": 1,
+        "Subtotal": 35.50
+      }
+    ],
+    "ClienteNombre": null,
+    "ClienteCorreo": null,
+    "ClienteTelefono": null,
+    "TipoServicio": "para_llevar",
+    "MesaNumero": null,
+    "ZonaFisicaNombre": null,
+    "DireccionEntrega": null,
+    "HoraPreferida": null,
+    "NotasCliente": null,
+    "CuponCodigo": null,
+    "MetodoPago": "efectivo",
+    "EstadoPago": "pendiente",
+    "ReferenciaPago": null,
+    "QrToken": "",
+    "QrUsado": false,
+    "QrUsadoEn": null
+  },
+  {
+    "Folio": "V260709-4816",
+    "Fecha": "2026-07-09T09:41:09.9519112-06:00",
+    "Subtotal": 0,
+    "Descuento": 0,
+    "Total": 65,
+    "Estado": "Recibido",
+    "Detalles": [
+      {
+        "Codigo": "P002",
+        "Nombre": "Frapp\u00E9 Moka",
+        "PrecioUnitario": 65,
+        "Cantidad": 1,
+        "Subtotal": 65
+      }
+    ],
+    "ClienteNombre": "Cliente Terminal Mesa",
+    "ClienteCorreo": "mesa@cafe.test",
+    "ClienteTelefono": "555-0202",
+    "TipoServicio": "local",
+    "MesaNumero": "M1",
+    "ZonaFisicaNombre": null,
+    "DireccionEntrega": null,
+    "HoraPreferida": null,
+    "NotasCliente": null,
+    "CuponCodigo": "CAFECITO10",
+    "MetodoPago": "efectivo",
+    "EstadoPago": "pendiente",
+    "ReferenciaPago": null,
+    "QrToken": "",
+    "QrUsado": false,
+    "QrUsadoEn": null
+  },
+  {
+    "Folio": "V260709-1743",
+    "Fecha": "2026-07-09T09:43:25.6585712-06:00",
+    "Subtotal": 0,
+    "Descuento": 0,
+    "Total": 315,
+    "Estado": "Recibido",
+    "Detalles": [
+      {
+        "Codigo": "C003",
+        "Nombre": "Combo No Era Hambre",
+        "PrecioUnitario": 105,
+        "Cantidad": 3,
+        "Subtotal": 315
+      }
+    ],
+    "ClienteNombre": "14. D\u00E1vila Chi Manuel Antonio",
+    "ClienteCorreo": "antoniodavila.230107@gmail.com",
+    "ClienteTelefono": "9992343386",
+    "TipoServicio": "para_llevar",
+    "MesaNumero": null,
+    "ZonaFisicaNombre": null,
+    "DireccionEntrega": null,
+    "HoraPreferida": null,
+    "NotasCliente": null,
+    "CuponCodigo": "CAFECITO10",
+    "MetodoPago": "efectivo",
+    "EstadoPago": "pendiente",
+    "ReferenciaPago": null,
+    "QrToken": "",
+    "QrUsado": false,
+    "QrUsadoEn": null
+  },
+  {
+    "Folio": "V260723-2354",
+    "Fecha": "2026-07-23T20:14:44.6199601-06:00",
+    "Subtotal": 35.50,
+    "Descuento": 0,
+    "Total": 35.50,
+    "Estado": "Recibido",
+    "Detalles": [
+      {
+        "Codigo": "P001",
+        "Nombre": "Caf\u00E9 Americano",
+        "PrecioUnitario": 35.50,
+        "Cantidad": 1,
+        "Subtotal": 35.50
+      }
+    ],
+    "ClienteNombre": "Prueba QR",
+    "ClienteCorreo": null,
+    "ClienteTelefono": null,
+    "TipoServicio": "para_llevar",
+    "MesaNumero": null,
+    "ZonaFisicaNombre": null,
+    "DireccionEntrega": null,
+    "HoraPreferida": null,
+    "NotasCliente": "Prueba automatica",
+    "CuponCodigo": null,
+    "MetodoPago": "online",
+    "EstadoPago": "pagado",
+    "ReferenciaPago": "ONLINE-V260723-2354-957",
+    "QrToken": "v260723-2354-4b1482e3a8cb3642",
+    "QrUsado": false,
+    "QrUsadoEn": null
+  },
+  {
+    "Folio": "V260723-8303",
+    "Fecha": "2026-07-23T20:16:37.8082875-06:00",
+    "Subtotal": 35.50,
+    "Descuento": 0,
+    "Total": 35.50,
+    "Estado": "Recibido",
+    "Detalles": [
+      {
+        "Codigo": "P001",
+        "Nombre": "Caf\u00E9 Americano",
+        "PrecioUnitario": 35.50,
+        "Cantidad": 1,
+        "Subtotal": 35.50
+      }
+    ],
+    "ClienteNombre": "Prueba efectivo QR",
+    "ClienteCorreo": null,
+    "ClienteTelefono": null,
+    "TipoServicio": "para_llevar",
+    "MesaNumero": null,
+    "ZonaFisicaNombre": null,
+    "DireccionEntrega": null,
+    "HoraPreferida": null,
+    "NotasCliente": "Prueba pago pendiente",
+    "CuponCodigo": null,
+    "MetodoPago": "efectivo",
+    "EstadoPago": "pendiente",
+    "ReferenciaPago": null,
+    "QrToken": "v260723-8303-6e653e10d4516a40",
+    "QrUsado": false,
+    "QrUsadoEn": null
+  },
+  {
+    "Folio": "V260723-9638",
+    "Fecha": "2026-07-23T20:16:52.5139367-06:00",
+    "Subtotal": 65,
+    "Descuento": 0,
+    "Total": 65,
+    "Estado": "Recibido",
+    "Detalles": [
+      {
+        "Codigo": "P002",
+        "Nombre": "Frapp\u00E9 Moka",
+        "PrecioUnitario": 65,
+        "Cantidad": 1,
+        "Subtotal": 65
+      }
+    ],
+    "ClienteNombre": "Prueba efectivo QR",
+    "ClienteCorreo": null,
+    "ClienteTelefono": null,
+    "TipoServicio": "para_llevar",
+    "MesaNumero": null,
+    "ZonaFisicaNombre": null,
+    "DireccionEntrega": null,
+    "HoraPreferida": null,
+    "NotasCliente": "Prueba pago pendiente",
+    "CuponCodigo": null,
+    "MetodoPago": "efectivo",
+    "EstadoPago": "pendiente",
+    "ReferenciaPago": null,
+    "QrToken": "v260723-9638-4e0055b59cb1c845",
+    "QrUsado": false,
+    "QrUsadoEn": null
+  },
+  {
+    "Folio": "V260723-3719",
+    "Fecha": "2026-07-23T20:18:12.8419308-06:00",
+    "Subtotal": 25,
+    "Descuento": 0,
+    "Total": 25,
+    "Estado": "Entregado",
+    "Detalles": [
+      {
+        "Codigo": "P003",
+        "Nombre": "Panqu\u00E9 de Elote",
+        "PrecioUnitario": 25,
+        "Cantidad": 1,
+        "Subtotal": 25
+      }
+    ],
+    "ClienteNombre": "Prueba efectivo QR",
+    "ClienteCorreo": null,
+    "ClienteTelefono": null,
+    "TipoServicio": "para_llevar",
+    "MesaNumero": null,
+    "ZonaFisicaNombre": null,
+    "DireccionEntrega": null,
+    "HoraPreferida": null,
+    "NotasCliente": "Prueba pago pendiente",
+    "CuponCodigo": null,
+    "MetodoPago": "efectivo",
+    "EstadoPago": "pagado",
+    "ReferenciaPago": "EFECTIVO-V260723-3719",
+    "QrToken": "v260723-3719-f6a5bf7991576147",
+    "QrUsado": true,
+    "QrUsadoEn": "2026-07-23T20:18:46.5843469-06:00"
+  }
+]

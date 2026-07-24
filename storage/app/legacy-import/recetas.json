@@ -1,0 +1,510 @@
+[
+  {
+    "ProductoCodigo": "P015",
+    "Nombre": "Receta Bagel Jamon y Queso",
+    "Rendimiento": 1,
+    "Insumos": [
+      {
+        "InsumoId": 23,
+        "Nombre": "Bagel natural",
+        "Unidad": "Pieza",
+        "Cantidad": 1,
+        "CostoUnitario": 11.0000
+      },
+      {
+        "InsumoId": 24,
+        "Nombre": "Jamon de pavo",
+        "Unidad": "Kg",
+        "Cantidad": 0.060,
+        "CostoUnitario": 128.0000
+      },
+      {
+        "InsumoId": 25,
+        "Nombre": "Queso manchego",
+        "Unidad": "Kg",
+        "Cantidad": 0.050,
+        "CostoUnitario": 136.0000
+      }
+    ],
+    "Preparacion": "Tostar bagel y rellenar con jamon y queso fundido.",
+    "Actualizada": "2026-07-23T16:02:35.7780095-06:00",
+    "Ingredientes": "1 Pieza Bagel natural, 0.06 Kg Jamon de pavo, 0.05 Kg Queso manchego",
+    "CostoTeorico": 25.4800000
+  },
+  {
+    "ProductoCodigo": "P014",
+    "Nombre": "Receta Sandwich de Pollo",
+    "Rendimiento": 1,
+    "Insumos": [
+      {
+        "InsumoId": 27,
+        "Nombre": "Jitomate",
+        "Unidad": "Kg",
+        "Cantidad": 0.040,
+        "CostoUnitario": 32.0000
+      },
+      {
+        "InsumoId": 26,
+        "Nombre": "Lechuga",
+        "Unidad": "Kg",
+        "Cantidad": 0.030,
+        "CostoUnitario": 28.0000
+      },
+      {
+        "InsumoId": 22,
+        "Nombre": "Pan artesanal",
+        "Unidad": "Pieza",
+        "Cantidad": 2,
+        "CostoUnitario": 9.0000
+      },
+      {
+        "InsumoId": 21,
+        "Nombre": "Pechuga de pollo",
+        "Unidad": "Kg",
+        "Cantidad": 0.120,
+        "CostoUnitario": 112.0000
+      },
+      {
+        "InsumoId": 25,
+        "Nombre": "Queso manchego",
+        "Unidad": "Kg",
+        "Cantidad": 0.030,
+        "CostoUnitario": 136.0000
+      }
+    ],
+    "Preparacion": "Armar pan con pollo, vegetales y queso.",
+    "Actualizada": "2026-07-23T16:02:35.7965676-06:00",
+    "Ingredientes": "0.04 Kg Jitomate, 0.03 Kg Lechuga, 2 Pieza Pan artesanal, 0.12 Kg Pechuga de pollo, 0.03 Kg Queso manchego",
+    "CostoTeorico": 37.6400000
+  },
+  {
+    "ProductoCodigo": "P002",
+    "Nombre": "Receta Frappe Moka",
+    "Rendimiento": 1,
+    "Insumos": [
+      {
+        "InsumoId": 1,
+        "Nombre": "Cafe espresso en grano",
+        "Unidad": "Kg",
+        "Cantidad": 0.018,
+        "CostoUnitario": 180.0000
+      },
+      {
+        "InsumoId": 7,
+        "Nombre": "Chocolate en polvo",
+        "Unidad": "Kg",
+        "Cantidad": 0.030,
+        "CostoUnitario": 92.0000
+      },
+      {
+        "InsumoId": 6,
+        "Nombre": "Crema batida",
+        "Unidad": "L",
+        "Cantidad": 0.030,
+        "CostoUnitario": 72.0000
+      },
+      {
+        "InsumoId": 14,
+        "Nombre": "Hielo",
+        "Unidad": "Kg",
+        "Cantidad": 0.250,
+        "CostoUnitario": 8.0000
+      },
+      {
+        "InsumoId": 3,
+        "Nombre": "Leche entera",
+        "Unidad": "L",
+        "Cantidad": 0.180,
+        "CostoUnitario": 24.0000
+      }
+    ],
+    "Preparacion": "Licuar cafe, leche, chocolate y hielo; terminar con crema.",
+    "Actualizada": "2026-07-23T16:02:35.7993467-06:00",
+    "Ingredientes": "0.018 Kg Cafe espresso en grano, 0.03 Kg Chocolate en polvo, 0.03 L Crema batida, 0.25 Kg Hielo, 0.18 L Leche entera",
+    "CostoTeorico": 14.4800000
+  },
+  {
+    "ProductoCodigo": "P009",
+    "Nombre": "Receta Limonada Mineral",
+    "Rendimiento": 1,
+    "Insumos": [
+      {
+        "InsumoId": 13,
+        "Nombre": "Agua mineral",
+        "Unidad": "L",
+        "Cantidad": 0.300,
+        "CostoUnitario": 15.0000
+      },
+      {
+        "InsumoId": 14,
+        "Nombre": "Hielo",
+        "Unidad": "Kg",
+        "Cantidad": 0.200,
+        "CostoUnitario": 8.0000
+      },
+      {
+        "InsumoId": 12,
+        "Nombre": "Limon natural",
+        "Unidad": "Kg",
+        "Cantidad": 0.080,
+        "CostoUnitario": 34.0000
+      }
+    ],
+    "Preparacion": "Exprimir limon y servir con agua mineral y hielo.",
+    "Actualizada": "2026-07-23T16:02:35.8032429-06:00",
+    "Ingredientes": "0.3 L Agua mineral, 0.2 Kg Hielo, 0.08 Kg Limon natural",
+    "CostoTeorico": 8.8200000
+  },
+  {
+    "ProductoCodigo": "P010",
+    "Nombre": "Receta Smoothie de Fresa",
+    "Rendimiento": 1,
+    "Insumos": [
+      {
+        "InsumoId": 10,
+        "Nombre": "Fresa congelada",
+        "Unidad": "Kg",
+        "Cantidad": 0.120,
+        "CostoUnitario": 88.0000
+      },
+      {
+        "InsumoId": 14,
+        "Nombre": "Hielo",
+        "Unidad": "Kg",
+        "Cantidad": 0.180,
+        "CostoUnitario": 8.0000
+      },
+      {
+        "InsumoId": 20,
+        "Nombre": "Yogur natural",
+        "Unidad": "L",
+        "Cantidad": 0.180,
+        "CostoUnitario": 38.0000
+      }
+    ],
+    "Preparacion": "Licuar fresa, yogur y hielo hasta textura uniforme.",
+    "Actualizada": "2026-07-23T16:02:35.8079503-06:00",
+    "Ingredientes": "0.12 Kg Fresa congelada, 0.18 Kg Hielo, 0.18 L Yogur natural",
+    "CostoTeorico": 18.8400000
+  },
+  {
+    "ProductoCodigo": "P008",
+    "Nombre": "Receta Te Chai Frio",
+    "Rendimiento": 1,
+    "Insumos": [
+      {
+        "InsumoId": 9,
+        "Nombre": "Concentrado chai",
+        "Unidad": "L",
+        "Cantidad": 0.080,
+        "CostoUnitario": 132.0000
+      },
+      {
+        "InsumoId": 14,
+        "Nombre": "Hielo",
+        "Unidad": "Kg",
+        "Cantidad": 0.200,
+        "CostoUnitario": 8.0000
+      },
+      {
+        "InsumoId": 3,
+        "Nombre": "Leche entera",
+        "Unidad": "L",
+        "Cantidad": 0.180,
+        "CostoUnitario": 24.0000
+      }
+    ],
+    "Preparacion": "Mezclar chai con leche y servir sobre hielo.",
+    "Actualizada": "2026-07-23T15:17:44.5234982-06:00",
+    "Ingredientes": "0.08 L Concentrado chai, 0.2 Kg Hielo, 0.18 L Leche entera",
+    "CostoTeorico": 16.4800000
+  },
+  {
+    "ProductoCodigo": "P001",
+    "Nombre": "Receta Cafe Americano",
+    "Rendimiento": 1,
+    "Insumos": [
+      {
+        "InsumoId": 31,
+        "Nombre": "Agua purificada",
+        "Unidad": "L",
+        "Cantidad": 0.220,
+        "CostoUnitario": 6.0000
+      },
+      {
+        "InsumoId": 1,
+        "Nombre": "Cafe espresso en grano",
+        "Unidad": "Kg",
+        "Cantidad": 0.018,
+        "CostoUnitario": 180.0000
+      }
+    ],
+    "Preparacion": "Extraer espresso y completar con agua caliente.",
+    "Actualizada": "2026-07-23T15:17:44.5299055-06:00",
+    "Ingredientes": "0.22 L Agua purificada, 0.018 Kg Cafe espresso en grano",
+    "CostoTeorico": 4.5600000
+  },
+  {
+    "ProductoCodigo": "P005",
+    "Nombre": "Receta Capuchino",
+    "Rendimiento": 1,
+    "Insumos": [
+      {
+        "InsumoId": 1,
+        "Nombre": "Cafe espresso en grano",
+        "Unidad": "Kg",
+        "Cantidad": 0.018,
+        "CostoUnitario": 180.0000
+      },
+      {
+        "InsumoId": 3,
+        "Nombre": "Leche entera",
+        "Unidad": "L",
+        "Cantidad": 0.180,
+        "CostoUnitario": 24.0000
+      }
+    ],
+    "Preparacion": "Extraer espresso, vaporizar leche y servir con espuma.",
+    "Actualizada": "2026-07-23T15:17:44.536178-06:00",
+    "Ingredientes": "0.018 Kg Cafe espresso en grano, 0.18 L Leche entera",
+    "CostoTeorico": 7.5600000
+  },
+  {
+    "ProductoCodigo": "P007",
+    "Nombre": "Receta Chocolate Caliente",
+    "Rendimiento": 1,
+    "Insumos": [
+      {
+        "InsumoId": 17,
+        "Nombre": "Azucar",
+        "Unidad": "Kg",
+        "Cantidad": 0.010,
+        "CostoUnitario": 28.0000
+      },
+      {
+        "InsumoId": 7,
+        "Nombre": "Chocolate en polvo",
+        "Unidad": "Kg",
+        "Cantidad": 0.035,
+        "CostoUnitario": 92.0000
+      },
+      {
+        "InsumoId": 3,
+        "Nombre": "Leche entera",
+        "Unidad": "L",
+        "Cantidad": 0.220,
+        "CostoUnitario": 24.0000
+      }
+    ],
+    "Preparacion": "Calentar leche y disolver chocolate hasta textura cremosa.",
+    "Actualizada": "2026-07-23T15:17:44.5389576-06:00",
+    "Ingredientes": "0.01 Kg Azucar, 0.035 Kg Chocolate en polvo, 0.22 L Leche entera",
+    "CostoTeorico": 8.7800000
+  },
+  {
+    "ProductoCodigo": "P004",
+    "Nombre": "Receta Espresso",
+    "Rendimiento": 1,
+    "Insumos": [
+      {
+        "InsumoId": 31,
+        "Nombre": "Agua purificada",
+        "Unidad": "L",
+        "Cantidad": 0.040,
+        "CostoUnitario": 6.0000
+      },
+      {
+        "InsumoId": 1,
+        "Nombre": "Cafe espresso en grano",
+        "Unidad": "Kg",
+        "Cantidad": 0.018,
+        "CostoUnitario": 180.0000
+      }
+    ],
+    "Preparacion": "Extraer espresso corto con molienda fresca.",
+    "Actualizada": "2026-07-23T15:17:44.550411-06:00",
+    "Ingredientes": "0.04 L Agua purificada, 0.018 Kg Cafe espresso en grano",
+    "CostoTeorico": 3.4800000
+  },
+  {
+    "ProductoCodigo": "P006",
+    "Nombre": "Receta Latte Vainilla",
+    "Rendimiento": 1,
+    "Insumos": [
+      {
+        "InsumoId": 1,
+        "Nombre": "Cafe espresso en grano",
+        "Unidad": "Kg",
+        "Cantidad": 0.018,
+        "CostoUnitario": 180.0000
+      },
+      {
+        "InsumoId": 8,
+        "Nombre": "Jarabe de vainilla",
+        "Unidad": "L",
+        "Cantidad": 0.020,
+        "CostoUnitario": 118.0000
+      },
+      {
+        "InsumoId": 3,
+        "Nombre": "Leche entera",
+        "Unidad": "L",
+        "Cantidad": 0.200,
+        "CostoUnitario": 24.0000
+      }
+    ],
+    "Preparacion": "Extraer espresso, mezclar con leche vaporizada y vainilla.",
+    "Actualizada": "2026-07-23T15:17:44.5543864-06:00",
+    "Ingredientes": "0.018 Kg Cafe espresso en grano, 0.02 L Jarabe de vainilla, 0.2 L Leche entera",
+    "CostoTeorico": 10.4000000
+  },
+  {
+    "ProductoCodigo": "P011",
+    "Nombre": "Receta Croissant",
+    "Rendimiento": 1,
+    "Insumos": [
+      {
+        "InsumoId": 17,
+        "Nombre": "Azucar",
+        "Unidad": "Kg",
+        "Cantidad": 0.015,
+        "CostoUnitario": 28.0000
+      },
+      {
+        "InsumoId": 15,
+        "Nombre": "Harina de trigo",
+        "Unidad": "Kg",
+        "Cantidad": 0.080,
+        "CostoUnitario": 22.0000
+      },
+      {
+        "InsumoId": 16,
+        "Nombre": "Mantequilla",
+        "Unidad": "Kg",
+        "Cantidad": 0.040,
+        "CostoUnitario": 96.0000
+      }
+    ],
+    "Preparacion": "Preparar masa laminada con mantequilla y hornear.",
+    "Actualizada": "2026-07-23T15:17:44.5572018-06:00",
+    "Ingredientes": "0.015 Kg Azucar, 0.08 Kg Harina de trigo, 0.04 Kg Mantequilla",
+    "CostoTeorico": 6.0200000
+  },
+  {
+    "ProductoCodigo": "P012",
+    "Nombre": "Receta Muffin de Arandano",
+    "Rendimiento": 1,
+    "Insumos": [
+      {
+        "InsumoId": 17,
+        "Nombre": "Azucar",
+        "Unidad": "Kg",
+        "Cantidad": 0.030,
+        "CostoUnitario": 28.0000
+      },
+      {
+        "InsumoId": 11,
+        "Nombre": "Frutos rojos",
+        "Unidad": "Kg",
+        "Cantidad": 0.035,
+        "CostoUnitario": 120.0000
+      },
+      {
+        "InsumoId": 15,
+        "Nombre": "Harina de trigo",
+        "Unidad": "Kg",
+        "Cantidad": 0.070,
+        "CostoUnitario": 22.0000
+      },
+      {
+        "InsumoId": 16,
+        "Nombre": "Mantequilla",
+        "Unidad": "Kg",
+        "Cantidad": 0.020,
+        "CostoUnitario": 96.0000
+      }
+    ],
+    "Preparacion": "Hornear mezcla base con frutos rojos.",
+    "Actualizada": "2026-07-23T15:17:44.5604977-06:00",
+    "Ingredientes": "0.03 Kg Azucar, 0.035 Kg Frutos rojos, 0.07 Kg Harina de trigo, 0.02 Kg Mantequilla",
+    "CostoTeorico": 8.5000000
+  },
+  {
+    "ProductoCodigo": "P003",
+    "Nombre": "Receta Panque de Elote",
+    "Rendimiento": 1,
+    "Insumos": [
+      {
+        "InsumoId": 17,
+        "Nombre": "Azucar",
+        "Unidad": "Kg",
+        "Cantidad": 0.025,
+        "CostoUnitario": 28.0000
+      },
+      {
+        "InsumoId": 18,
+        "Nombre": "Elote dulce",
+        "Unidad": "Kg",
+        "Cantidad": 0.080,
+        "CostoUnitario": 42.0000
+      },
+      {
+        "InsumoId": 15,
+        "Nombre": "Harina de trigo",
+        "Unidad": "Kg",
+        "Cantidad": 0.060,
+        "CostoUnitario": 22.0000
+      },
+      {
+        "InsumoId": 16,
+        "Nombre": "Mantequilla",
+        "Unidad": "Kg",
+        "Cantidad": 0.020,
+        "CostoUnitario": 96.0000
+      }
+    ],
+    "Preparacion": "Hornear mezcla de elote, harina, mantequilla y azucar.",
+    "Actualizada": "2026-07-23T15:17:44.5646776-06:00",
+    "Ingredientes": "0.025 Kg Azucar, 0.08 Kg Elote dulce, 0.06 Kg Harina de trigo, 0.02 Kg Mantequilla",
+    "CostoTeorico": 7.3000000
+  },
+  {
+    "ProductoCodigo": "P013",
+    "Nombre": "Receta Cheesecake",
+    "Rendimiento": 1,
+    "Insumos": [
+      {
+        "InsumoId": 17,
+        "Nombre": "Azucar",
+        "Unidad": "Kg",
+        "Cantidad": 0.030,
+        "CostoUnitario": 28.0000
+      },
+      {
+        "InsumoId": 11,
+        "Nombre": "Frutos rojos",
+        "Unidad": "Kg",
+        "Cantidad": 0.040,
+        "CostoUnitario": 120.0000
+      },
+      {
+        "InsumoId": 15,
+        "Nombre": "Harina de trigo",
+        "Unidad": "Kg",
+        "Cantidad": 0.030,
+        "CostoUnitario": 22.0000
+      },
+      {
+        "InsumoId": 19,
+        "Nombre": "Queso crema",
+        "Unidad": "Kg",
+        "Cantidad": 0.090,
+        "CostoUnitario": 94.0000
+      }
+    ],
+    "Preparacion": "Montar base y relleno de queso crema con frutos rojos.",
+    "Actualizada": "2026-07-23T15:17:44.5677017-06:00",
+    "Ingredientes": "0.03 Kg Azucar, 0.04 Kg Frutos rojos, 0.03 Kg Harina de trigo, 0.09 Kg Queso crema",
+    "CostoTeorico": 14.7600000
+  }
+]

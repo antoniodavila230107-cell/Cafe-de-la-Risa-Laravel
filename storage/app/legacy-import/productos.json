@@ -1,0 +1,152 @@
+[
+  {
+    "Codigo": "P001",
+    "Nombre": "Caf\u00E9 Americano",
+    "Precio": 35.50,
+    "Existencia": 47,
+    "Categoria": "Caf\u00E9",
+    "Descripcion": "Caf\u00E9 negro de sabor intenso y aroma reci\u00E9n tostado.",
+    "Icono": "\u2615",
+    "Imagen": "/images/productos/cafe-americano.png"
+  },
+  {
+    "Codigo": "P002",
+    "Nombre": "Frapp\u00E9 Moka",
+    "Precio": 65,
+    "Existencia": 16,
+    "Categoria": "Bebidas fr\u00EDas",
+    "Descripcion": "Caf\u00E9, chocolate y hielo coronados con crema.",
+    "Icono": "\uD83E\uDD64",
+    "Imagen": "/images/productos/frappe-moka.png"
+  },
+  {
+    "Codigo": "P003",
+    "Nombre": "Panqu\u00E9 de Elote",
+    "Precio": 25,
+    "Existencia": 14,
+    "Categoria": "Panader\u00EDa",
+    "Descripcion": "Rebanada suave de panqu\u00E9 casero de ma\u00EDz.",
+    "Icono": "\uD83C\uDF70",
+    "Imagen": "/images/productos/panque-elote.png"
+  },
+  {
+    "Codigo": "P004",
+    "Nombre": "Espresso",
+    "Precio": 30,
+    "Existencia": 35,
+    "Categoria": "Caf\u00E9",
+    "Descripcion": "Extracci\u00F3n corta, concentrada y arom\u00E1tica.",
+    "Icono": "\u2615",
+    "Imagen": "/images/productos/espresso.png"
+  },
+  {
+    "Codigo": "P005",
+    "Nombre": "Capuchino",
+    "Precio": 48,
+    "Existencia": 27,
+    "Categoria": "Caf\u00E9",
+    "Descripcion": "Espresso con leche vaporizada y espuma cremosa.",
+    "Icono": "\u2615",
+    "Imagen": "/images/productos/capuchino.png"
+  },
+  {
+    "Codigo": "P006",
+    "Nombre": "Latte Vainilla",
+    "Precio": 55,
+    "Existencia": 24,
+    "Categoria": "Caf\u00E9",
+    "Descripcion": "Caf\u00E9 con leche y un toque suave de vainilla.",
+    "Icono": "\uD83E\uDD5B",
+    "Imagen": "/images/productos/latte-vainilla.png"
+  },
+  {
+    "Codigo": "P007",
+    "Nombre": "Chocolate Caliente",
+    "Precio": 50,
+    "Existencia": 22,
+    "Categoria": "Caf\u00E9",
+    "Descripcion": "Chocolate espeso preparado con leche caliente.",
+    "Icono": "\uD83C\uDF6B",
+    "Imagen": "/images/productos/chocolate-caliente.png"
+  },
+  {
+    "Codigo": "P008",
+    "Nombre": "T\u00E9 Chai Fr\u00EDo",
+    "Precio": 52,
+    "Existencia": 18,
+    "Categoria": "Bebidas fr\u00EDas",
+    "Descripcion": "T\u00E9 especiado con leche servido sobre hielo.",
+    "Icono": "\uD83E\uDDCB",
+    "Imagen": "/images/productos/te-chai-frio.png"
+  },
+  {
+    "Codigo": "P009",
+    "Nombre": "Limonada Mineral",
+    "Precio": 42,
+    "Existencia": 24,
+    "Categoria": "Bebidas fr\u00EDas",
+    "Descripcion": "Lim\u00F3n natural, agua mineral y hielo.",
+    "Icono": "\uD83C\uDF4B",
+    "Imagen": "/images/productos/limonada-mineral.png"
+  },
+  {
+    "Codigo": "P010",
+    "Nombre": "Smoothie de Fresa",
+    "Precio": 60,
+    "Existencia": 16,
+    "Categoria": "Bebidas fr\u00EDas",
+    "Descripcion": "Fresas mezcladas con yogur y hielo.",
+    "Icono": "\uD83C\uDF53",
+    "Imagen": "/images/productos/smoothie-fresa.png"
+  },
+  {
+    "Codigo": "P011",
+    "Nombre": "Croissant de Mantequilla",
+    "Precio": 32,
+    "Existencia": 20,
+    "Categoria": "Panader\u00EDa",
+    "Descripcion": "Hojaldre dorado de textura ligera y crujiente.",
+    "Icono": "\uD83E\uDD50",
+    "Imagen": "/images/productos/croissant-mantequilla.png"
+  },
+  {
+    "Codigo": "P012",
+    "Nombre": "Muffin de Ar\u00E1ndano",
+    "Precio": 34,
+    "Existencia": 18,
+    "Categoria": "Panader\u00EDa",
+    "Descripcion": "Muffin esponjoso con ar\u00E1ndanos dulces.",
+    "Icono": "\uD83E\uDDC1",
+    "Imagen": "/images/productos/muffin-arandano.png"
+  },
+  {
+    "Codigo": "P013",
+    "Nombre": "Cheesecake de Frutos Rojos",
+    "Precio": 58,
+    "Existencia": 11,
+    "Categoria": "Postres",
+    "Descripcion": "Tarta cremosa con salsa de frutos rojos.",
+    "Icono": "\uD83C\uDF70",
+    "Imagen": "/images/productos/cheesecake-frutos-rojos.png"
+  },
+  {
+    "Codigo": "P014",
+    "Nombre": "S\u00E1ndwich de Pollo",
+    "Precio": 75,
+    "Existencia": 9,
+    "Categoria": "Alimentos",
+    "Descripcion": "Pollo, vegetales frescos y aderezo de la casa.",
+    "Icono": "\uD83E\uDD6A",
+    "Imagen": "/images/productos/sandwich-pollo.png"
+  },
+  {
+    "Codigo": "P015",
+    "Nombre": "Bagel de Jam\u00F3n y Queso",
+    "Precio": 68,
+    "Existencia": 13,
+    "Categoria": "Alimentos",
+    "Descripcion": "Bagel tostado con jam\u00F3n y queso fundido.",
+    "Icono": "\uD83E\uDD6F",
+    "Imagen": "/images/productos/bagel-jamon-queso.png"
+  }
+]

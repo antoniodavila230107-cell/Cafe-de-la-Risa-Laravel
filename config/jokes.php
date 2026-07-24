@@ -120,7 +120,7 @@ return [
     "¿Qué hace un pingüino en una fiesta? Romper el hielo.",
     "¿Por qué las flores van a la escuela? Para aprender a florecer.",
     "¿Qué le dijo un árbol a otro? ¡Qué plantado estás!",
-    "¿Cómo se dice náufrago en chino? Chinchancha.",
+    "¿Cómo se dice náufrago en chino? Chin lancha.",
     "¿Qué hace un oso panda con una guitarra? Panda-rock.",
     "¿Por qué la luna es tan fría? Porque apaga el sol de noche.",
     "¿Qué le dice un foco a otro foco? Te veo muy brillante hoy.",

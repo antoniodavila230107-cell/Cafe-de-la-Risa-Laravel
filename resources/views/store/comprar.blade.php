@@ -291,7 +291,19 @@
         </div>
 
         <form id="checkoutForm" onsubmit="processCheckout(event)">
-            <h4 style="color: var(--primary-coffee); margin-bottom: 0.8rem;">Datos para Recoger</h4>
+            <h4 style="color: var(--primary-coffee); margin-bottom: 0.8rem;">Opciones del Pedido</h4>
+
+            {{-- Selección de Modalidad: Recoger vs Delivery --}}
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.2rem;">
+                <label id="lblOptionPickup" style="background: #FFF8E1; border: 2px solid var(--primary-coffee); padding: 10px; border-radius: 10px; text-align: center; cursor: pointer; font-weight: 700; color: var(--primary-coffee); transition: all 0.2s;">
+                    <input type="radio" name="service_type_radio" value="para_llevar" checked onchange="toggleServiceType()" style="display:none;">
+                    🥡 Recoger en Sucursal
+                </label>
+                <label id="lblOptionDelivery" style="background: #F5F2EB; border: 2px solid #D7CCC8; padding: 10px; border-radius: 10px; text-align: center; cursor: pointer; font-weight: 700; color: #8D6E63; transition: all 0.2s;">
+                    <input type="radio" name="service_type_radio" value="delivery" onchange="toggleServiceType()" style="display:none;">
+                    🛵 Entrega a Domicilio
+                </label>
+            </div>
 
             <div style="margin-bottom: 1rem;">
                 <label style="display: block; font-weight: 600; margin-bottom: 4px; font-size: 0.9rem;">Nombre Completo *</label>
@@ -300,15 +312,39 @@
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
                 <div>
-                    <label style="display: block; font-weight: 600; margin-bottom: 4px; font-size: 0.9rem;">Teléfono</label>
-                    <input type="text" id="custPhone" placeholder="55 1234 5678" style="width: 100%; padding: 8px 12px; border: 1px solid #D7CCC8; border-radius: 6px;">
+                    <label style="display: block; font-weight: 600; margin-bottom: 4px; font-size: 0.9rem;">Teléfono de Contacto *</label>
+                    <input type="text" id="custPhone" required placeholder="55 1234 5678" style="width: 100%; padding: 8px 12px; border: 1px solid #D7CCC8; border-radius: 6px;">
                 </div>
                 <div>
                     <label style="display: block; font-weight: 600; margin-bottom: 4px; font-size: 0.9rem;">Método de Pago *</label>
                     <select id="payMethod" required onchange="toggleCardInput()" style="width: 100%; padding: 8px 12px; border: 1px solid #D7CCC8; border-radius: 6px;">
-                        <option value="online">Pago en Línea (Tarjeta Simulada)</option>
-                        <option value="efectivo">Pagar al Recoger (Efectivo)</option>
+                        <option value="online">💳 Tarjeta de Crédito/Débito (Simulado)</option>
+                        <option value="efectivo">💵 Efectivo (Al Entregar / Recoger)</option>
+                        <option value="oxxo">🏪 Ficha de Pago OXXO (14 dígitos)</option>
                     </select>
+                </div>
+            </div>
+
+            {{-- Campos de Dirección para Delivery --}}
+            <div id="deliveryFields" style="display: none; background: #FAF7F2; padding: 1rem; border-radius: 10px; border: 1px dashed #D7CCC8; margin-bottom: 1rem;">
+                <h5 style="color: var(--primary-coffee); font-size: 0.95rem; margin-bottom: 0.8rem;">📍 Dirección de Entrega</h5>
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 0.8rem; margin-bottom: 0.8rem;">
+                    <div>
+                        <label style="display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 2px;">Calle *</label>
+                        <input type="text" id="delivStreet" placeholder="Av. Insurgentes Sur" style="width: 100%; padding: 7px 10px; border: 1px solid #D7CCC8; border-radius: 6px; font-size: 0.9rem;">
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 2px;">No. Ext / Int *</label>
+                        <input type="text" id="delivNum" placeholder="123 Int 4B" style="width: 100%; padding: 7px 10px; border: 1px solid #D7CCC8; border-radius: 6px; font-size: 0.9rem;">
+                    </div>
+                </div>
+                <div style="margin-bottom: 0.8rem;">
+                    <label style="display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 2px;">Colonia / Alcadía *</label>
+                    <input type="text" id="delivNeigh" placeholder="Col. Roma Norte" style="width: 100%; padding: 7px 10px; border: 1px solid #D7CCC8; border-radius: 6px; font-size: 0.9rem;">
+                </div>
+                <div>
+                    <label style="display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 2px;">Referencias de Entrega (Ej. Portón negro, timbre 2)</label>
+                    <input type="text" id="delivRef" placeholder="Entre Juárez e Hidalgo" style="width: 100%; padding: 7px 10px; border: 1px solid #D7CCC8; border-radius: 6px; font-size: 0.9rem;">
                 </div>
             </div>
 
@@ -317,8 +353,12 @@
                 <input type="text" id="cardNumber" placeholder="4532 1234 5678 9010" maxlength="19" style="width: 100%; padding: 8px 12px; border: 1px solid #D7CCC8; border-radius: 6px;">
             </div>
 
-            <div style="margin-bottom: 1rem;">
-                <label style="display: block; font-weight: 600; margin-bottom: 4px; font-size: 0.9rem;">Zona / Mesa de Referencia (Opcional)</label>
+            <div id="oxxoInfo" style="display: none; background: #FFF3E0; border: 1px solid #FFE082; padding: 0.8rem 1rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; color: #E65100;">
+                🏪 <strong>Pago en OXXO:</strong> Al confirmar se generará tu ficha con código de 14 dígitos válido por 48 hrs.
+            </div>
+
+            <div id="tableField" style="margin-bottom: 1rem;">
+                <label style="display: block; font-weight: 600; margin-bottom: 4px; font-size: 0.9rem;">Mesa / Zona de Referencia (Opcional)</label>
                 <select id="tableSelect" style="width: 100%; padding: 8px 12px; border: 1px solid #D7CCC8; border-radius: 6px;">
                     <option value="">-- Ninguna mesa seleccionada --</option>
                     @foreach($zones as $zone)
@@ -337,7 +377,7 @@
             </div>
 
             <button type="submit" id="btnSubmitOrder" style="width: 100%; background: var(--primary-coffee); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 700; font-size: 1.1rem; cursor: pointer;">
-                Confirmar Pedido y Generar QR
+                Confirmar Pedido y Generar Ticket / QR
             </button>
         </form>
         @endauth
@@ -440,17 +480,62 @@
         document.getElementById('cartModal').style.display = 'none';
     }
 
+    function toggleServiceType() {
+        const val = document.querySelector('input[name="service_type_radio"]:checked').value;
+        const delivFields = document.getElementById('deliveryFields');
+        const tableField = document.getElementById('tableField');
+        const lblPickup = document.getElementById('lblOptionPickup');
+        const lblDelivery = document.getElementById('lblOptionDelivery');
+
+        if (val === 'delivery') {
+            delivFields.style.display = 'block';
+            tableField.style.display = 'none';
+            document.getElementById('delivStreet').required = true;
+            document.getElementById('delivNum').required = true;
+            document.getElementById('delivNeigh').required = true;
+
+            lblDelivery.style.background = '#FFF8E1';
+            lblDelivery.style.borderColor = 'var(--primary-coffee)';
+            lblDelivery.style.color = 'var(--primary-coffee)';
+
+            lblPickup.style.background = '#F5F2EB';
+            lblPickup.style.borderColor = '#D7CCC8';
+            lblPickup.style.color = '#8D6E63';
+        } else {
+            delivFields.style.display = 'none';
+            tableField.style.display = 'block';
+            document.getElementById('delivStreet').required = false;
+            document.getElementById('delivNum').required = false;
+            document.getElementById('delivNeigh').required = false;
+
+            lblPickup.style.background = '#FFF8E1';
+            lblPickup.style.borderColor = 'var(--primary-coffee)';
+            lblPickup.style.color = 'var(--primary-coffee)';
+
+            lblDelivery.style.background = '#F5F2EB';
+            lblDelivery.style.borderColor = '#D7CCC8';
+            lblDelivery.style.color = '#8D6E63';
+        }
+    }
+
     function toggleCardInput() {
         const pay = document.getElementById('payMethod').value;
         const cardField = document.getElementById('cardField');
         const cardInput = document.getElementById('cardNumber');
+        const oxxoInfo = document.getElementById('oxxoInfo');
 
         if (pay === 'online') {
             cardField.style.display = 'block';
             cardInput.required = true;
+            oxxoInfo.style.display = 'none';
+        } else if (pay === 'oxxo') {
+            cardField.style.display = 'none';
+            cardInput.required = false;
+            oxxoInfo.style.display = 'block';
         } else {
             cardField.style.display = 'none';
             cardInput.required = false;
+            oxxoInfo.style.display = 'none';
         }
     }
 
@@ -462,17 +547,24 @@
             return;
         }
 
+        const serviceType = document.querySelector('input[name="service_type_radio"]:checked').value;
+
         const btn = document.getElementById('btnSubmitOrder');
         btn.disabled = true;
         btn.innerText = 'Procesando en MySQL...';
 
         const payload = {
+            service_type: serviceType,
             customer_name: document.getElementById('custName').value,
             customer_phone: document.getElementById('custPhone').value,
             payment_method: document.getElementById('payMethod').value,
-            table_id: document.getElementById('tableSelect').value || null,
+            table_id: serviceType === 'para_llevar' ? (document.getElementById('tableSelect').value || null) : null,
+            delivery_street: serviceType === 'delivery' ? document.getElementById('delivStreet').value : null,
+            delivery_number: serviceType === 'delivery' ? document.getElementById('delivNum').value : null,
+            delivery_neighborhood: serviceType === 'delivery' ? document.getElementById('delivNeigh').value : null,
+            delivery_references: serviceType === 'delivery' ? document.getElementById('delivRef').value : null,
             coupon_code: document.getElementById('couponCode').value || null,
-            card_number: document.getElementById('cardNumber').value || null,
+            card_number: document.getElementById('payMethod').value === 'online' ? document.getElementById('cardNumber').value : null,
             cart_items: cart.map(i => ({ product_id: i.product_id, quantity: i.quantity }))
         };
 
@@ -493,12 +585,12 @@
             } else {
                 alert(data.error || 'Ocurrió un error al procesar el pedido.');
                 btn.disabled = false;
-                btn.innerText = 'Confirmar Pedido y Generar QR';
+                btn.innerText = 'Confirmar Pedido y Generar Ticket / QR';
             }
         } catch (err) {
             alert('Error de conexión con el servidor.');
             btn.disabled = false;
-            btn.innerText = 'Confirmar Pedido y Generar QR';
+            btn.innerText = 'Confirmar Pedido y Generar Ticket / QR';
         }
     }
 </script>

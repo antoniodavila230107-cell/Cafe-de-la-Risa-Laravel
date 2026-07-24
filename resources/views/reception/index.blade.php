@@ -1,24 +1,18 @@
 @extends('layouts.reception')
 
-@section('title', 'Recepción & QR — Café de la Risa')
+@section('title', 'Recepción & Control de Pedidos — Café de la Risa')
 
 @section('content')
 
 @if(session('success'))
     <div style="background-color: #E8F5E9; color: #2E7D32; padding: 1rem; border-radius: 8px; font-weight: 600; margin-bottom: 1.5rem;">
-        {{ session('success') }}
+        ✅ {{ session('success') }}
     </div>
 @endif
 
 @if(session('error'))
     <div style="background-color: #FFEBEE; color: #C62828; padding: 1rem; border-radius: 8px; font-weight: 600; margin-bottom: 1.5rem;">
-        {{ session('error') }}
-    </div>
-@endif
-
-@if(session('info'))
-    <div style="background-color: #E3F2FD; color: #1565C0; padding: 1rem; border-radius: 8px; font-weight: 600; margin-bottom: 1.5rem;">
-        {{ session('info') }}
+        ❌ {{ session('error') }}
     </div>
 @endif
 
@@ -52,9 +46,39 @@
                     </span>
                 @else
                     <span style="background: #E8F5E9; color: #2E7D32; padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 0.9rem;">
-                        ✅ QR VÁLIDO (De Un Solo Uso)
+                        ✅ QR VÁLIDO
                     </span>
                 @endif
+            </div>
+        </div>
+
+        {{-- Cambiador de Estado del Rastreador --}}
+        <div style="background: white; padding: 1rem; border-radius: 10px; margin-bottom: 1.2rem; border: 1px solid #E0D7D0;">
+            <strong style="color: #3E2723; display: block; margin-bottom: 8px;">📍 Cambiar Estado del Rastreador (3 Estados):</strong>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <form action="{{ route('reception.updateStatus', $selectedOrder->id) }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="order_status" value="preparing">
+                    <button type="submit" style="background: {{ in_array($selectedOrder->order_status, ['received','preparing']) ? '#E65100' : '#FFF3E0' }}; color: {{ in_array($selectedOrder->order_status, ['received','preparing']) ? 'white' : '#E65100' }}; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.85rem;">
+                        1. 👨‍🍳 En Preparación
+                    </button>
+                </form>
+
+                <form action="{{ route('reception.updateStatus', $selectedOrder->id) }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="order_status" value="on_the_way">
+                    <button type="submit" style="background: {{ in_array($selectedOrder->order_status, ['on_the_way','ready']) ? '#1565C0' : '#E3F2FD' }}; color: {{ in_array($selectedOrder->order_status, ['on_the_way','ready']) ? 'white' : '#1565C0' }}; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.85rem;">
+                        2. 🛵 En Camino / Listo
+                    </button>
+                </form>
+
+                <form action="{{ route('reception.updateStatus', $selectedOrder->id) }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="order_status" value="delivered">
+                    <button type="submit" style="background: {{ $selectedOrder->order_status === 'delivered' ? '#2E7D32' : '#E8F5E9' }}; color: {{ $selectedOrder->order_status === 'delivered' ? 'white' : '#2E7D32' }}; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.85rem;">
+                        3. ✅ Entregado
+                    </button>
+                </form>
             </div>
         </div>
 
@@ -66,18 +90,24 @@
                 @if($selectedOrder->payment_status === 'paid')
                     <p style="color: #2E7D32; font-weight: 700; font-size: 1.1rem;">🟢 PAGADO (${{ number_format($selectedOrder->total, 2) }})</p>
                     <small style="color: #666;">Método: {{ strtoupper($selectedOrder->payment_method) }}</small>
+                @elseif($selectedOrder->payment_method === 'oxxo')
+                    <p style="color: #E65100; font-weight: 700; font-size: 1.1rem;">🏪 OXXO PAY PENDIENTE (${{ number_format($selectedOrder->total, 2) }})</p>
+                    <small style="color: #666;">Ref: {{ $selectedOrder->oxxo_reference }}</small>
                 @else
-                    <p style="color: #E65100; font-weight: 700; font-size: 1.1rem;">🟠 PAGO PENDIENTE DE COBRO (${{ number_format($selectedOrder->total, 2) }})</p>
-                    <small style="color: #666;">Registrar cobro simulado en efectivo al entregar</small>
+                    <p style="color: #E65100; font-weight: 700; font-size: 1.1rem;">🟠 PAGO EN EFECTIVO PENDIENTE (${{ number_format($selectedOrder->total, 2) }})</p>
+                    <small style="color: #666;">Cobrar al entregar</small>
                 @endif
             </div>
 
             <div>
-                <h4 style="color: #3E2723; margin-bottom: 8px;">Mesa de Referencia:</h4>
-                @if($selectedOrder->table)
+                <h4 style="color: #3E2723; margin-bottom: 8px;">Modalidad de Entrega:</h4>
+                @if($selectedOrder->service_type === 'delivery')
+                    <p style="color: #1565C0; font-weight: 700;">🛵 Entrega a Domicilio</p>
+                    <small style="color: #5D4037;">{{ $selectedOrder->full_address }}</small>
+                @elseif($selectedOrder->table)
                     <p style="color: #3E2723; font-weight: 600;">{{ $selectedOrder->table->zone?->name }} — Mesa {{ $selectedOrder->table->number }}</p>
                 @else
-                    <p style="color: #888;">Sin mesa asignada</p>
+                    <p style="color: #888;">🥡 Recoger en Sucursal</p>
                 @endif
             </div>
         </div>
@@ -97,9 +127,9 @@
                 @csrf
                 <button type="submit" style="width: 100%; background: #2E7D32; color: white; border: none; padding: 14px; border-radius: 8px; font-size: 1.1rem; font-weight: 700; cursor: pointer;">
                     @if($selectedOrder->payment_status === 'pending')
-                        Confirmar Cobro en Efectivo (${{ number_format($selectedOrder->total, 2) }}) y Entregar Pedido
+                        Confirmar Cobro y Marcar como Entregado (${{ number_format($selectedOrder->total, 2) }})
                     @else
-                        Confirmar Entrega de Pedido (Inutilizar QR)
+                        Confirmar Entrega de Pedido
                     @endif
                 </button>
             </form>
@@ -111,15 +141,17 @@
 
 <!-- Cola de Pedidos Pendientes -->
 <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
-    <h3 style="color: #3E2723; margin-bottom: 1rem;">📋 Cola de Pedidos Pendientes por Entregar</h3>
+    <h3 style="color: #3E2723; margin-bottom: 1rem;">📋 Control y Rastreo de Pedidos Activos</h3>
 
-    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
+    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
         <thead>
             <tr style="background: #F5F2EB; border-bottom: 2px solid #D7CCC8;">
                 <th style="padding: 10px;">Folio</th>
                 <th style="padding: 10px;">Cliente</th>
+                <th style="padding: 10px;">Modalidad</th>
                 <th style="padding: 10px;">Pago</th>
-                <th style="padding: 10px;">Total</th>
+                <th style="padding: 10px;">Estado Actual</th>
+                <th style="padding: 10px;">Cambiar Estado</th>
                 <th style="padding: 10px;">Acción</th>
             </tr>
         </thead>
@@ -129,22 +161,58 @@
                     <td style="padding: 10px; font-weight: 700; font-family: monospace;">{{ $ord->folio }}</td>
                     <td style="padding: 10px;">{{ $ord->customer_name }}</td>
                     <td style="padding: 10px;">
-                        @if($ord->payment_status === 'paid')
-                            <span style="color: #2E7D32; font-weight: 600;">🟢 Pagado</span>
+                        @if($ord->service_type === 'delivery')
+                            <span style="color: #1565C0; font-weight: 600;">🛵 Delivery</span>
                         @else
-                            <span style="color: #E65100; font-weight: 600;">🟠 Por Cobrar</span>
+                            <span style="color: #3E2723;">🥡 Recoger</span>
                         @endif
                     </td>
-                    <td style="padding: 10px; font-weight: 700;">${{ number_format($ord->total, 2) }}</td>
                     <td style="padding: 10px;">
-                        <a href="{{ route('reception.index', ['token' => $ord->qr_token]) }}" style="background: #8D6E63; color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: 600;">
-                            Abrir QR
+                        @if($ord->payment_status === 'paid')
+                            <span style="color: #2E7D32; font-weight: 600;">🟢 Pagado</span>
+                        @elseif($ord->payment_method === 'oxxo')
+                            <span style="color: #E65100; font-weight: 600;">🏪 OXXO</span>
+                        @else
+                            <span style="color: #E65100; font-weight: 600;">💵 Efectivo</span>
+                        @endif
+                    </td>
+                    <td style="padding: 10px;">
+                        @if($ord->order_status === 'preparing' || $ord->order_status === 'received')
+                            <span style="background: #FFF3E0; color: #E65100; padding: 4px 8px; border-radius: 12px; font-weight: 700; font-size: 0.78rem;">👨‍🍳 En Preparación</span>
+                        @elseif($ord->order_status === 'on_the_way' || $ord->order_status === 'ready')
+                            <span style="background: #E3F2FD; color: #1565C0; padding: 4px 8px; border-radius: 12px; font-weight: 700; font-size: 0.78rem;">🛵 En Camino</span>
+                        @else
+                            <span style="background: #E8F5E9; color: #2E7D32; padding: 4px 8px; border-radius: 12px; font-weight: 700; font-size: 0.78rem;">✅ Entregado</span>
+                        @endif
+                    </td>
+                    <td style="padding: 10px;">
+                        <div style="display: flex; gap: 4px;">
+                            <form action="{{ route('reception.updateStatus', $ord->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                <input type="hidden" name="order_status" value="preparing">
+                                <button type="submit" title="Marcar en Preparación" style="background: #FFF3E0; color: #E65100; border: 1px solid #FFE082; border-radius: 4px; padding: 3px 6px; font-size: 0.75rem; cursor: pointer;">👨‍🍳</button>
+                            </form>
+                            <form action="{{ route('reception.updateStatus', $ord->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                <input type="hidden" name="order_status" value="on_the_way">
+                                <button type="submit" title="Marcar En Camino" style="background: #E3F2FD; color: #1565C0; border: 1px solid #90CAF9; border-radius: 4px; padding: 3px 6px; font-size: 0.75rem; cursor: pointer;">🛵</button>
+                            </form>
+                            <form action="{{ route('reception.updateStatus', $ord->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                <input type="hidden" name="order_status" value="delivered">
+                                <button type="submit" title="Marcar Entregado" style="background: #E8F5E9; color: #2E7D32; border: 1px solid #A5D6A7; border-radius: 4px; padding: 3px 6px; font-size: 0.75rem; cursor: pointer;">✅</button>
+                            </form>
+                        </div>
+                    </td>
+                    <td style="padding: 10px;">
+                        <a href="{{ route('reception.index', ['token' => $ord->qr_token]) }}" style="background: #3E2723; color: white; padding: 4px 10px; border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 600;">
+                            Detalles / QR
                         </a>
                     </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5" style="padding: 15px; text-align: center; color: #888;">No hay pedidos pendientes en la cola.</td>
+                    <td colspan="7" style="padding: 15px; text-align: center; color: #888;">No hay pedidos activos en el sistema.</td>
                 </tr>
             @endforelse
         </tbody>

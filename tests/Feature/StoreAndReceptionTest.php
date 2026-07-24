@@ -69,7 +69,16 @@ class StoreAndReceptionTest extends TestCase
             'quantity' => 0.018,
         ]);
 
+        $customerRole = Role::create(['name' => 'customer', 'display_name' => 'Cliente']);
+        $user = User::create([
+            'role_id' => $customerRole->id,
+            'name' => 'Juan Pérez',
+            'email' => 'juan@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
         $payload = [
+            'service_type' => 'para_llevar',
             'customer_name' => 'Juan Pérez',
             'customer_phone' => '5512345678',
             'payment_method' => 'online',
@@ -79,7 +88,7 @@ class StoreAndReceptionTest extends TestCase
             ]
         ];
 
-        $response = $this->postJson('/checkout', $payload);
+        $response = $this->actingAs($user)->postJson('/checkout', $payload);
 
         $response->assertStatus(200);
         $response->assertJson(['success' => true]);

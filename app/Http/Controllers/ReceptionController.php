@@ -83,4 +83,52 @@ class ReceptionController extends Controller
 
         return redirect()->route('reception.index')->with('success', "¡Pedido {$order->folio} entregado exitosamente!");
     }
+
+    public function updateStatus(Request $request, Order $order)
+    {
+        $request->validate([
+            'order_status' => 'required|in:received,preparing,on_the_way,ready,delivered,cancelled',
+        ]);
+
+        $newStatus = $request->order_status;
+
+        DB::transaction(function () use ($order, $newStatus) {
+            $order->order_status = $newStatus;
+
+            if ($newStatus === 'delivered') {
+                $order->qr_used = true;
+                $order->qr_used_at = now();
+
+                if ($order->payment_status === 'pending') {
+                    $order->payment_status = 'paid';
+                    Payment::create([
+                        'order_id' => $order->id,
+                        'payment_method' => $order->payment_method ?: 'efectivo',
+                        'amount' => $order->total,
+                        'reference' => 'ENTREGA-COBRO',
+                        'status' => 'approved',
+                    ]);
+                }
+
+                if ($order->table_id) {
+                    Table::where('id', $order->table_id)->update([
+                        'status' => 'available',
+                        'reserved_until' => null,
+                        'current_order_folio' => null,
+                    ]);
+                }
+            }
+
+            $order->save();
+        });
+
+        $labels = [
+            'preparing'  => 'En Preparación 👨‍🍳',
+            'on_the_way' => 'En Camino / Listo 🛵',
+            'delivered'  => 'Entregado ✅',
+        ];
+
+        $statusText = $labels[$newStatus] ?? $newStatus;
+        return back()->with('success', "Estado del pedido {$order->folio} actualizado a: {$statusText}");
+    }
 }

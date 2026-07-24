@@ -15,6 +15,10 @@ class Order extends Model
         'customer_phone',
         'customer_email',
         'service_type',
+        'delivery_street',
+        'delivery_number',
+        'delivery_neighborhood',
+        'delivery_references',
         'table_id',
         'subtotal',
         'discount',
@@ -28,6 +32,8 @@ class Order extends Model
         'preferred_time',
         'notes',
         'card_last_four',
+        'oxxo_reference',
+        'oxxo_expires_at',
     ];
 
     protected $casts = [
@@ -36,7 +42,21 @@ class Order extends Model
         'total' => 'decimal:2',
         'qr_used' => 'boolean',
         'qr_used_at' => 'datetime',
+        'oxxo_expires_at' => 'datetime',
     ];
+
+    public function getFullAddressAttribute(): string
+    {
+        if ($this->service_type !== 'delivery') {
+            return 'Recoger en Sucursal';
+        }
+        $parts = array_filter([
+            $this->delivery_street ? "Calle {$this->delivery_street}" : null,
+            $this->delivery_number ? "#{$this->delivery_number}" : null,
+            $this->delivery_neighborhood ? "Col. {$this->delivery_neighborhood}" : null,
+        ]);
+        return count($parts) > 0 ? implode(', ', $parts) : 'Dirección no especificada';
+    }
 
     public function user(): BelongsTo
     {

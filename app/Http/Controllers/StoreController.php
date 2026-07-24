@@ -44,7 +44,12 @@ class StoreController extends Controller
         $validated = $request->validate([
             'customer_name'            => 'required|string|max:120',
             'customer_phone'           => 'nullable|string|max:30',
-            'payment_method'           => 'required|in:online,efectivo',
+            'service_type'             => 'required|in:para_llevar,delivery',
+            'delivery_street'          => 'required_if:service_type,delivery|nullable|string|max:150',
+            'delivery_number'          => 'required_if:service_type,delivery|nullable|string|max:20',
+            'delivery_neighborhood'    => 'required_if:service_type,delivery|nullable|string|max:150',
+            'delivery_references'      => 'nullable|string|max:255',
+            'payment_method'           => 'required|in:online,efectivo,oxxo',
             'table_id'                 => 'nullable|exists:tables,id',
             'coupon_code'              => 'nullable|string',
             'preferred_time'           => 'nullable|string|max:50',
@@ -94,26 +99,39 @@ class StoreController extends Controller
         $folio    = 'V' . date('ymd') . '-' . rand(1000, 9999);
         $qrToken  = Str::uuid()->toString();
 
-        $order = DB::transaction(function () use ($validated, $user, $subtotal, $discount, $total, $folio, $qrToken, $orderItemsData, $coupon) {
+        $oxxoRef = null;
+        $oxxoExpires = null;
+        if ($validated['payment_method'] === 'oxxo') {
+            $oxxoRef = '9382' . rand(10000000, 99999999) . rand(10, 99);
+            $oxxoExpires = now()->addDays(2);
+        }
+
+        $order = DB::transaction(function () use ($validated, $user, $subtotal, $discount, $total, $folio, $qrToken, $orderItemsData, $coupon, $oxxoRef, $oxxoExpires) {
             $order = Order::create([
-                'user_id'        => $user->id,
-                'folio'          => $folio,
-                'customer_name'  => $validated['customer_name'],
-                'customer_phone' => $validated['customer_phone'] ?? null,
-                'customer_email' => $user->email,          // siempre desde la cuenta
-                'service_type'   => 'para_llevar',
-                'table_id'       => $validated['table_id'] ?? null,
-                'subtotal'       => $subtotal,
-                'discount'       => $discount,
-                'total'          => $total,
-                'payment_method' => $validated['payment_method'],
-                'payment_status' => $validated['payment_method'] === 'online' ? 'paid' : 'pending',
-                'order_status'   => 'received',
-                'qr_token'       => $qrToken,
-                'qr_used'        => false,
-                'preferred_time' => $validated['preferred_time'] ?? null,
-                'notes'          => $validated['notes'] ?? null,
-                'card_last_four' => !empty($validated['card_number']) ? substr($validated['card_number'], -4) : null,
+                'user_id'               => $user->id,
+                'folio'                 => $folio,
+                'customer_name'         => $validated['customer_name'],
+                'customer_phone'        => $validated['customer_phone'] ?? null,
+                'customer_email'        => $user->email,
+                'service_type'          => $validated['service_type'],
+                'delivery_street'       => $validated['delivery_street'] ?? null,
+                'delivery_number'       => $validated['delivery_number'] ?? null,
+                'delivery_neighborhood' => $validated['delivery_neighborhood'] ?? null,
+                'delivery_references'   => $validated['delivery_references'] ?? null,
+                'table_id'              => $validated['table_id'] ?? null,
+                'subtotal'              => $subtotal,
+                'discount'              => $discount,
+                'total'                 => $total,
+                'payment_method'        => $validated['payment_method'],
+                'payment_status'        => $validated['payment_method'] === 'online' ? 'paid' : 'pending',
+                'order_status'          => 'received',
+                'qr_token'              => $qrToken,
+                'qr_used'               => false,
+                'preferred_time'        => $validated['preferred_time'] ?? null,
+                'notes'                 => $validated['notes'] ?? null,
+                'card_last_four'        => !empty($validated['card_number']) ? substr($validated['card_number'], -4) : null,
+                'oxxo_reference'        => $oxxoRef,
+                'oxxo_expires_at'       => $oxxoExpires,
             ]);
 
             foreach ($orderItemsData as $item) {

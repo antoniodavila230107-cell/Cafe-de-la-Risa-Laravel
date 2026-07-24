@@ -50,6 +50,7 @@ Route::middleware(['auth', 'role:admin,reception'])->group(function () {
     Route::get('/recepcion', [ReceptionController::class, 'index'])->name('reception.index');
     Route::post('/recepcion/validar', [ReceptionController::class, 'validateQr'])->name('reception.validateQr');
     Route::post('/recepcion/entregar/{order}', [ReceptionController::class, 'deliver'])->name('reception.deliver');
+    Route::post('/recepcion/estado/{order}', [ReceptionController::class, 'updateStatus'])->name('reception.updateStatus');
 
     Route::get('/cocina', [KitchenController::class, 'index'])->name('kitchen.index');
     Route::post('/cocina/update/{order}', [KitchenController::class, 'updateStatus'])->name('kitchen.updateStatus');

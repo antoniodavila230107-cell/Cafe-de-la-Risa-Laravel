@@ -293,15 +293,14 @@
             <h4 style="color: var(--primary-coffee); margin-bottom: 0.8rem;">Opciones del Pedido</h4>
 
             {{-- Selección de Modalidad: Recoger vs Delivery --}}
+            <input type="hidden" id="selectedServiceType" value="para_llevar">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.2rem;">
-                <label id="lblOptionPickup" style="background: #FFF8E1; border: 2px solid var(--primary-coffee); padding: 10px; border-radius: 10px; text-align: center; cursor: pointer; font-weight: 700; color: var(--primary-coffee); transition: all 0.2s;">
-                    <input type="radio" name="service_type_radio" value="para_llevar" checked onchange="toggleServiceType()" style="display:none;">
+                <button type="button" id="btnOptionPickup" onclick="selectServiceType('para_llevar')" style="background: #FFF8E1; border: 2px solid var(--primary-coffee); padding: 10px; border-radius: 10px; text-align: center; cursor: pointer; font-weight: 700; color: var(--primary-coffee); transition: all 0.2s;">
                     🥡 Recoger en Sucursal
-                </label>
-                <label id="lblOptionDelivery" style="background: #F5F2EB; border: 2px solid #D7CCC8; padding: 10px; border-radius: 10px; text-align: center; cursor: pointer; font-weight: 700; color: #8D6E63; transition: all 0.2s;">
-                    <input type="radio" name="service_type_radio" value="delivery" onchange="toggleServiceType()" style="display:none;">
+                </button>
+                <button type="button" id="btnOptionDelivery" onclick="selectServiceType('delivery')" style="background: #F5F2EB; border: 2px solid #D7CCC8; padding: 10px; border-radius: 10px; text-align: center; cursor: pointer; font-weight: 700; color: #8D6E63; transition: all 0.2s;">
                     🛵 Entrega a Domicilio
-                </label>
+                </button>
             </div>
 
             <div style="margin-bottom: 1rem;">
@@ -479,27 +478,27 @@
         document.getElementById('cartModal').style.display = 'none';
     }
 
-    function toggleServiceType() {
-        const val = document.querySelector('input[name="service_type_radio"]:checked').value;
+    function selectServiceType(type) {
+        document.getElementById('selectedServiceType').value = type;
         const delivFields = document.getElementById('deliveryFields');
         const tableField = document.getElementById('tableField');
-        const lblPickup = document.getElementById('lblOptionPickup');
-        const lblDelivery = document.getElementById('lblOptionDelivery');
+        const btnPickup = document.getElementById('btnOptionPickup');
+        const btnDelivery = document.getElementById('btnOptionDelivery');
 
-        if (val === 'delivery') {
+        if (type === 'delivery') {
             delivFields.style.display = 'block';
             tableField.style.display = 'none';
             document.getElementById('delivStreet').required = true;
             document.getElementById('delivNum').required = true;
             document.getElementById('delivNeigh').required = true;
 
-            lblDelivery.style.background = '#FFF8E1';
-            lblDelivery.style.borderColor = 'var(--primary-coffee)';
-            lblDelivery.style.color = 'var(--primary-coffee)';
+            btnDelivery.style.background = '#FFF8E1';
+            btnDelivery.style.borderColor = 'var(--primary-coffee)';
+            btnDelivery.style.color = 'var(--primary-coffee)';
 
-            lblPickup.style.background = '#F5F2EB';
-            lblPickup.style.borderColor = '#D7CCC8';
-            lblPickup.style.color = '#8D6E63';
+            btnPickup.style.background = '#F5F2EB';
+            btnPickup.style.borderColor = '#D7CCC8';
+            btnPickup.style.color = '#8D6E63';
         } else {
             delivFields.style.display = 'none';
             tableField.style.display = 'block';
@@ -507,13 +506,13 @@
             document.getElementById('delivNum').required = false;
             document.getElementById('delivNeigh').required = false;
 
-            lblPickup.style.background = '#FFF8E1';
-            lblPickup.style.borderColor = 'var(--primary-coffee)';
-            lblPickup.style.color = 'var(--primary-coffee)';
+            btnPickup.style.background = '#FFF8E1';
+            btnPickup.style.borderColor = 'var(--primary-coffee)';
+            btnPickup.style.color = 'var(--primary-coffee)';
 
-            lblDelivery.style.background = '#F5F2EB';
-            lblDelivery.style.borderColor = '#D7CCC8';
-            lblDelivery.style.color = '#8D6E63';
+            btnDelivery.style.background = '#F5F2EB';
+            btnDelivery.style.borderColor = '#D7CCC8';
+            btnDelivery.style.color = '#8D6E63';
         }
     }
 
@@ -546,7 +545,7 @@
             return;
         }
 
-        const serviceType = document.querySelector('input[name="service_type_radio"]:checked').value;
+        const serviceType = document.getElementById('selectedServiceType').value;
 
         const btn = document.getElementById('btnSubmitOrder');
         btn.disabled = true;

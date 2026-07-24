@@ -9,9 +9,7 @@ services:
       - key: APP_DEBUG
         value: "false"
       - key: APP_KEY
-        generateValue: true
-      - key: APP_URL
-        sync: false
+        value: base64:YjEtH8yycb+mPjcZR3aEjvPbwbQco1ZnWnkLA0F/l9I=
       - key: DB_CONNECTION
         value: sqlite
       - key: DB_DATABASE

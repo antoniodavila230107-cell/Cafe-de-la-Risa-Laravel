@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Order extends Model
 {
     protected $fillable = [
+        'user_id',
         'folio',
         'customer_name',
         'customer_phone',
@@ -36,6 +37,11 @@ class Order extends Model
         'qr_used' => 'boolean',
         'qr_used_at' => 'datetime',
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(\App\Models\User::class);
+    }
 
     public function table(): BelongsTo
     {

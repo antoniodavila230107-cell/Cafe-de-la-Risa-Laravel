@@ -56,6 +56,6 @@ class User extends Authenticatable
 
     public function orders()
     {
-        return $this->hasMany(\App\Models\Order::class, 'customer_email', 'email');
+        return $this->hasMany(\App\Models\Order::class, 'user_id');
     }
 }

@@ -61,6 +61,13 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/pedidos', [\App\Http\Controllers\Admin\OrderController::class, 'index'])->name('admin.orders.index');
 
+    // Empleados, Sueldos y Asignaciones
+    Route::get('/empleados', [\App\Http\Controllers\Admin\EmployeeController::class, 'index'])->name('admin.employees.index');
+    Route::post('/empleados', [\App\Http\Controllers\Admin\EmployeeController::class, 'store'])->name('admin.employees.store');
+    Route::post('/empleados/{employee}/update', [\App\Http\Controllers\Admin\EmployeeController::class, 'update'])->name('admin.employees.update');
+    Route::post('/empleados/{employee}/toggle', [\App\Http\Controllers\Admin\EmployeeController::class, 'toggle'])->name('admin.employees.toggle');
+    Route::delete('/empleados/{employee}', [\App\Http\Controllers\Admin\EmployeeController::class, 'destroy'])->name('admin.employees.destroy');
+
     // Productos
     Route::get('/productos', [ProductController::class, 'index'])->name('admin.products.index');
     Route::post('/productos', [ProductController::class, 'store'])->name('admin.products.store');

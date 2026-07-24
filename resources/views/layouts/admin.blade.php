@@ -149,6 +149,9 @@
             <li class="sidebar-item {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
                 <a href="{{ route('admin.orders.index') }}">📋 Pedidos & Delivery</a>
             </li>
+            <li class="sidebar-item {{ request()->routeIs('admin.employees.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.employees.index') }}">👥 Empleados & Sueldos</a>
+            </li>
             <li class="sidebar-item {{ request()->routeIs('admin.products.*') ? 'active' : '' }}">
                 <a href="{{ route('admin.products.index') }}">☕ Productos</a>
             </li>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Employee;
 use App\Models\Expense;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -32,7 +33,12 @@ class ReportController extends Controller
         $ordersCount = $orders->count();
         $averageTicket = $ordersCount > 0 ? round($totalSales / $ordersCount, 2) : 0;
 
-        $totalExpenses = Expense::where('expense_date', '>=', $startDate->toDateString())->sum('amount');
+        $directExpenses = Expense::where('expense_date', '>=', $startDate->toDateString())->sum('amount');
+        
+        $activeEmployees = Employee::where('active', true)->get();
+        $payrollExpenses = $activeEmployees->sum(fn($e) => $e->monthly_salary);
+
+        $totalExpenses = $directExpenses + $payrollExpenses;
         $netIncome = max(0, round($totalSales - $totalExpenses, 2));
 
         return view('admin.reports.index', compact(
@@ -43,6 +49,8 @@ class ReportController extends Controller
             'totalDiscount',
             'ordersCount',
             'averageTicket',
+            'directExpenses',
+            'payrollExpenses',
             'totalExpenses',
             'netIncome'
         ));

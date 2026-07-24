@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             ZoneTableSeeder::class,
             CouponSeeder::class,
             DeliveryOrderSeeder::class,
+            EmployeeSeeder::class,
         ]);
     }
 }

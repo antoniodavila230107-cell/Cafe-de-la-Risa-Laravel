@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Employee;
 use App\Models\Expense;
 use Illuminate\Http\Request;
 
@@ -11,9 +12,14 @@ class ExpenseController extends Controller
     public function index()
     {
         $expenses = Expense::latest('expense_date')->get();
-        $totalExpenses = $expenses->sum('amount');
+        $directExpenses = $expenses->sum('amount');
 
-        return view('admin.expenses.index', compact('expenses', 'totalExpenses'));
+        $activeEmployees = Employee::where('active', true)->with('tables')->get();
+        $payrollExpenses = $activeEmployees->sum(fn($e) => $e->monthly_salary);
+
+        $totalExpenses = $directExpenses + $payrollExpenses;
+
+        return view('admin.expenses.index', compact('expenses', 'directExpenses', 'payrollExpenses', 'totalExpenses', 'activeEmployees'));
     }
 
     public function store(Request $request)

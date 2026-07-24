@@ -25,4 +25,9 @@ class Table extends Model
     {
         return $this->belongsTo(Zone::class);
     }
+
+    public function waiters()
+    {
+        return $this->belongsToMany(Employee::class, 'employee_table');
+    }
 }

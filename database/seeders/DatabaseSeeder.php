@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ZoneTableSeeder::class,
             CouponSeeder::class,
+            DeliveryOrderSeeder::class,
         ]);
     }
 }

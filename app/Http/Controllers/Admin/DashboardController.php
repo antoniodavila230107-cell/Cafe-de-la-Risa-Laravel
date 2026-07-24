@@ -25,7 +25,7 @@ class DashboardController extends Controller
         $availableTablesCount = Table::where('status', 'available')->count();
         $totalTablesCount = Table::count();
 
-        $recentOrders = Order::with('items')->latest()->take(7)->get();
+        $recentOrders = Order::with(['items', 'table.zone'])->latest()->take(15)->get();
         $productsCount = Product::where('active', true)->count();
 
         return view('admin.dashboard', compact(

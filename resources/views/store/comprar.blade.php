@@ -183,6 +183,31 @@
 </style>
 @section('content')
 
+@if(!auth()->check() || auth()->user()->role?->name === 'customer')
+<div style="background: white; border: 1px solid #DADCE0; border-radius: 12px; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.08);">
+    <div style="display:flex; align-items:center; gap:10px; color:#3C4043; font-size:0.95rem;">
+        <svg width="20" height="20" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.74-.06-1.28-.19-1.84H9v3.34h4.96c-.1.83-.64 2.08-1.84 2.92l2.84 2.2c1.7-1.57 2.68-3.88 2.68-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.84-2.2c-.76.53-1.78.9-3.12.9-2.38 0-4.41-1.57-5.13-3.72L.97 13.06C2.45 16 5.48 18 9 18z"/><path fill="#FBBC05" d="M3.87 10.8c-.18-.53-.28-1.1-.28-1.8s.1-1.27.28-1.8L.97 4.94C.35 6.17 0 7.55 0 9s.35 2.83.97 4.06l2.9-2.26z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0 5.48 0 2.45 2 1.07 4.94l2.9 2.26C4.6 5.15 6.62 3.58 9 3.58z"/></svg>
+        @auth
+            <span>Sesión iniciada como <strong>{{ auth()->user()->name }}</strong></span>
+        @else
+            <span>Inicia sesión para completar tu pedido más rápido</span>
+        @endauth
+    </div>
+    @guest
+    <a href="{{ route('auth.google') }}" style="display: inline-flex; align-items: center; gap: 8px; background: #4285F4; color: white; padding: 8px 18px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size:0.9rem; transition: background 0.2s;" onmouseover="this.style.background='#3367D6'" onmouseout="this.style.background='#4285F4'">
+        <svg width="16" height="16" viewBox="0 0 18 18"><path fill="white" d="M17.64 9.2c0-.74-.06-1.28-.19-1.84H9v3.34h4.96c-.1.83-.64 2.08-1.84 2.92l2.84 2.2c1.7-1.57 2.68-3.88 2.68-6.62z"/><path fill="white" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.84-2.2c-.76.53-1.78.9-3.12.9-2.38 0-4.41-1.57-5.13-3.72L.97 13.06C2.45 16 5.48 18 9 18z"/><path fill="white" d="M3.87 10.8c-.18-.53-.28-1.1-.28-1.8s.1-1.27.28-1.8L.97 4.94C.35 6.17 0 7.55 0 9s.35 2.83.97 4.06l2.9-2.26z"/><path fill="white" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0 5.48 0 2.45 2 1.07 4.94l2.9 2.26C4.6 5.15 6.62 3.58 9 3.58z"/></svg>
+        Continuar con Google
+    </a>
+    @endguest
+</div>
+@endif
+
+@if(session('success'))
+<div style="background: #E8F5E9; color: #2E7D32; border: 1px solid #A5D6A7; border-radius: 8px; padding: 12px 16px; margin-bottom: 1rem; font-weight: 600;">
+    ✅ {{ session('success') }}
+</div>
+@endif
+
 <div class="store-hero">
     <h2>Ordena en Línea para Recoger</h2>
     <p>Selecciona tus productos favoritos, elige tu mesa o zona de referencia y retira con tu código QR.</p>
@@ -244,11 +269,6 @@
 
         <form id="checkoutForm" onsubmit="processCheckout(event)">
             <h4 style="color: var(--primary-coffee); margin-bottom: 0.8rem;">Datos para Recoger</h4>
-
-            <a href="{{ route('auth.google') }}" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: white; border: 1px solid #DADCE0; color: #3C4043; padding: 10px; border-radius: 8px; font-weight: 600; text-decoration: none; margin-bottom: 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-                <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.74-.06-1.28-.19-1.84H9v3.34h4.96c-.1.83-.64 2.08-1.84 2.92l2.84 2.2c1.7-1.57 2.68-3.88 2.68-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.84-2.2c-.76.53-1.78.9-3.12.9-2.38 0-4.41-1.57-5.13-3.72L.97 13.06C2.45 16 5.48 18 9 18z"/><path fill="#FBBC05" d="M3.87 10.8c-.18-.53-.28-1.1-.28-1.8s.1-1.27.28-1.8L.97 4.94C.35 6.17 0 7.55 0 9s.35 2.83.97 4.06l2.9-2.26z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0 5.48 0 2.45 2 1.07 4.94l2.9 2.26C4.6 5.15 6.62 3.58 9 3.58z"/></svg>
-                Continuar con Google
-            </a>
 
             <div style="margin-bottom: 1rem;">
                 <label style="display: block; font-weight: 600; margin-bottom: 4px; font-size: 0.9rem;">Nombre Completo *</label>

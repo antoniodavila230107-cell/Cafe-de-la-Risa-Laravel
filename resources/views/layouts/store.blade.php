@@ -246,6 +246,15 @@
                             <p>{{ auth()->user()->name }}</p>
                             <small>{{ auth()->user()->email }}</small>
                         </div>
+                        @if(auth()->user()->isAdmin())
+                            <a href="{{ route('admin.dashboard') }}" style="color: #3E2723; font-weight: 700; background: #FFF8E1;">
+                                📊 Panel de Administración
+                            </a>
+                        @elseif(auth()->user()->isReception())
+                            <a href="{{ route('reception.index') }}" style="color: #3E2723; font-weight: 700; background: #FFF8E1;">
+                                📋 Panel de Recepción
+                            </a>
+                        @endif
                         <a href="{{ route('profile.index') }}">
                             👤 Ver mi Perfil
                         </a>
@@ -267,6 +276,9 @@
                             <svg width="16" height="16" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.74-.06-1.28-.19-1.84H9v3.34h4.96c-.1.83-.64 2.08-1.84 2.92l2.84 2.2c1.7-1.57 2.68-3.88 2.68-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.84-2.2c-.76.53-1.78.9-3.12.9-2.38 0-4.41-1.57-5.13-3.72L.97 13.06C2.45 16 5.48 18 9 18z"/><path fill="#FBBC05" d="M3.87 10.8c-.18-.53-.28-1.1-.28-1.8s.1-1.27.28-1.8L.97 4.94C.35 6.17 0 7.55 0 9s.35 2.83.97 4.06l2.9-2.26z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0 5.48 0 2.45 2 1.07 4.94l2.9 2.26C4.6 5.15 6.62 3.58 9 3.58z"/></svg>
                             Continuar con Google
                         </a>
+                        <a href="{{ route('login') }}" style="border-top: 1px solid #EFEBE9; color: #8D6E63; font-size: 0.85rem;">
+                            🔐 Acceso Personal / Admin
+                        </a>
                     @endauth
                 </div>
             </div>
@@ -279,6 +291,11 @@
 
     <footer class="footer">
         <p>&copy; {{ date('Y') }} Café de la Risa — Todos los derechos reservados.</p>
+        <p style="margin-top: 6px;">
+            <a href="{{ route('login') }}" style="color: var(--accent-gold); text-decoration: none; opacity: 0.75; font-size: 0.8rem;">
+                🔐 Acceso al Sistema Administrativo (Personal)
+            </a>
+        </p>
     </footer>
 
     @yield('scripts')

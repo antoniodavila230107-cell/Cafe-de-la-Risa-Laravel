@@ -31,4 +31,17 @@ RUN composer install --no-dev --optimize-autoloader
 ENV PORT=8000
 EXPOSE 8000
 
-CMD ["sh", "-c", "touch database/database.sqlite && chmod -R 777 storage database && php artisan migrate --force && php artisan db:seed --force && php artisan cafe:import-products && php artisan cafe:import-recipes && php artisan cafe:import-sales && php artisan serve --host=0.0.0.0 --port=$PORT"]
+# Al iniciar el contenedor, inyectamos las variables de entorno de Render al .env de Laravel
+CMD ["sh", "-c", "\
+    touch database/database.sqlite && \
+    chmod -R 777 storage database && \
+    [ -n \"$GOOGLE_CLIENT_ID\" ] && echo \"GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}\" >> .env || true && \
+    [ -n \"$GOOGLE_CLIENT_SECRET\" ] && echo \"GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}\" >> .env || true && \
+    echo \"GOOGLE_REDIRECT_URI=https://cafe-de-la-risa.onrender.com/auth/google/callback\" >> .env && \
+    php artisan config:clear && \
+    php artisan migrate --force && \
+    php artisan db:seed --force && \
+    php artisan cafe:import-products && \
+    php artisan cafe:import-recipes && \
+    php artisan cafe:import-sales && \
+    php artisan serve --host=0.0.0.0 --port=$PORT"]

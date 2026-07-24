@@ -246,6 +246,12 @@
                             <p>{{ auth()->user()->name }}</p>
                             <small>{{ auth()->user()->email }}</small>
                         </div>
+                        <a href="{{ route('profile.index') }}">
+                            👤 Ver mi Perfil
+                        </a>
+                        <a href="{{ route('store.comprar') }}">
+                            🛒 Hacer un Pedido
+                        </a>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="danger">

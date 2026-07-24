@@ -48,4 +48,14 @@ class User extends Authenticatable
     {
         return $this->role && in_array($this->role->name, ['admin', 'reception']);
     }
+
+    public function isCustomer(): bool
+    {
+        return $this->role && $this->role->name === 'customer';
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(\App\Models\Order::class, 'customer_email', 'email');
+    }
 }

@@ -33,6 +33,12 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/auth/google', [\App\Http\Controllers\GoogleAuthController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('/auth/google/callback', [\App\Http\Controllers\GoogleAuthController::class, 'handleGoogleCallback'])->name('auth.google.callback');
 
+// Perfil de Cliente (requiere login)
+Route::middleware('auth')->group(function () {
+    Route::get('/perfil', [\App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/perfil', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+});
+
 // Recepción y Monitor de Cocina (Requiere login con rol admin o reception)
 Route::middleware(['auth', 'role:admin,reception'])->group(function () {
     Route::get('/recepcion', [ReceptionController::class, 'index'])->name('reception.index');

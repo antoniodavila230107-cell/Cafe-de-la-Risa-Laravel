@@ -132,11 +132,6 @@
             margin-top: auto;
         }
 
-        .footer a {
-            color: #FFFFFF;
-            text-decoration: underline;
-        }
-
         @media (max-width: 768px) {
             .header {
                 padding: 0.8rem 1rem;
@@ -164,20 +159,6 @@
 
         <nav class="header-nav">
             <a href="{{ route('store.comprar') }}" class="nav-link">Menú</a>
-            <a href="{{ route('store.acerca') }}" class="nav-link">Acerca del Proyecto</a>
-            @auth
-                @if(auth()->user()->isAdmin())
-                    <a href="{{ route('admin.dashboard') }}" class="nav-link">Panel Admin</a>
-                @elseif(auth()->user()->isReception())
-                    <a href="{{ route('reception.index') }}" class="nav-link">Recepción</a>
-                @endif
-                <form action="{{ route('logout') }}" method="POST" style="display:inline;">
-                    @csrf
-                    <button type="submit" class="nav-link" style="background:none; border:none; cursor:pointer;">Salir</button>
-                </form>
-            @else
-                <a href="{{ route('login') }}" class="nav-link">Personal</a>
-            @endauth
 
             <button class="btn-cart" id="openCartBtn">
                 🛒 Carrito <span class="cart-badge" id="cartCount">0</span>
@@ -190,8 +171,7 @@
     </main>
 
     <footer class="footer">
-        <p>&copy; {{ date('Y') }} Café de la Risa — Aplicación web demostrativa (Laravel + MySQL)</p>
-        <p style="font-size: 0.8rem; opacity: 0.8; margin-top: 4px;">Demostración de portafolio sin persistencia JSON en ejecución</p>
+        <p>&copy; {{ date('Y') }} Café de la Risa — Todos los derechos reservados.</p>
     </footer>
 
     @yield('scripts')

@@ -186,6 +186,10 @@
                     </td>
                     <td style="padding: 10px;">
                         <div style="display: flex; gap: 6px;">
+                            <button type="button" onclick="openEditModal({{ $emp->id }})" style="background: #FFF3E0; border: 1px solid #FFE082; color: #E65100; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">
+                                ✏️ Editar
+                            </button>
+
                             <form action="{{ route('admin.employees.toggle', $emp->id) }}" method="POST">
                                 @csrf
                                 <button type="submit" style="background: #F5F2EB; border: 1px solid #D7CCC8; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">
@@ -200,6 +204,84 @@
                                     🗑️
                                 </button>
                             </form>
+                        </div>
+
+                        {{-- Modal de Edición del Empleado --}}
+                        <div id="editModal-{{ $emp->id }}" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 250;">
+                            <div style="background: white; width: 90%; max-width: 580px; padding: 1.8rem; border-radius: 14px; max-height: 90vh; overflow-y: auto;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                    <h3 style="color: #3E2723;">✏️ Editar Empleado: {{ $emp->name }}</h3>
+                                    <button type="button" onclick="closeEditModal({{ $emp->id }})" style="background:none; border:none; font-size: 1.5rem; cursor:pointer;">&times;</button>
+                                </div>
+
+                                <form action="{{ route('admin.employees.update', $emp->id) }}" method="POST">
+                                    @csrf
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                                        <div>
+                                            <label style="display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px;">Nombre *</label>
+                                            <input type="text" name="name" value="{{ $emp->name }}" required style="width: 100%; padding: 8px; border: 1px solid #D7CCC8; border-radius: 6px;">
+                                        </div>
+                                        <div>
+                                            <label style="display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px;">Puesto / Rol *</label>
+                                            <select name="job_role" id="editJobRole-{{ $emp->id }}" onchange="toggleEditRoleAssignments({{ $emp->id }})" style="width: 100%; padding: 8px; border: 1px solid #D7CCC8; border-radius: 6px;">
+                                                <option value="mesero" {{ $emp->job_role === 'mesero' ? 'selected' : '' }}>🍷 Mesero</option>
+                                                <option value="recepcionista" {{ $emp->job_role === 'recepcionista' ? 'selected' : '' }}>📋 Recepcionista</option>
+                                                <option value="cocinero" {{ $emp->job_role === 'cocinero' ? 'selected' : '' }}>👨‍🍳 Cocinero</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                                        <div>
+                                            <label style="display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px;">Sueldo ($) *</label>
+                                            <input type="number" step="0.01" name="salary" value="{{ $emp->salary }}" required style="width: 100%; padding: 8px; border: 1px solid #D7CCC8; border-radius: 6px;">
+                                        </div>
+                                        <div>
+                                            <label style="display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px;">Periodo de Pago *</label>
+                                            <select name="salary_period" style="width: 100%; padding: 8px; border: 1px solid #D7CCC8; border-radius: 6px;">
+                                                <option value="mensual" {{ $emp->salary_period === 'mensual' ? 'selected' : '' }}>Mensual</option>
+                                                <option value="quincenal" {{ $emp->salary_period === 'quincenal' ? 'selected' : '' }}>Quincenal</option>
+                                                <option value="diario" {{ $emp->salary_period === 'diario' ? 'selected' : '' }}>Diario</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                                        <div>
+                                            <label style="display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px;">Correo</label>
+                                            <input type="email" name="email" value="{{ $emp->email }}" style="width: 100%; padding: 8px; border: 1px solid #D7CCC8; border-radius: 6px;">
+                                        </div>
+                                        <div>
+                                            <label style="display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 4px;">Teléfono</label>
+                                            <input type="text" name="phone" value="{{ $emp->phone }}" style="width: 100%; padding: 8px; border: 1px solid #D7CCC8; border-radius: 6px;">
+                                        </div>
+                                    </div>
+
+                                    {{-- Asignación de Mesas (para Meseros) --}}
+                                    <div id="editWaiterField-{{ $emp->id }}" style="display: {{ $emp->job_role === 'mesero' ? 'block' : 'none' }}; background: #FAF7F2; padding: 1rem; border-radius: 8px; border: 1px dashed #D7CCC8; margin-bottom: 1rem;">
+                                        <label style="display: block; font-weight: 700; color: #3E2723; margin-bottom: 6px; font-size: 0.85rem;">🍷 Modificar Mesas Asignadas:</label>
+                                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                            @php $assignedIds = $emp->tables->pluck('id')->toArray(); @endphp
+                                            @foreach($allTables as $tbl)
+                                            <label style="background: white; border: 1px solid #D7CCC8; padding: 4px 8px; border-radius: 6px; font-size: 0.82rem; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+                                                <input type="checkbox" name="table_ids[]" value="{{ $tbl->id }}" {{ in_array($tbl->id, $assignedIds) ? 'checked' : '' }}>
+                                                Mesa {{ $tbl->number }}
+                                            </label>
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                    {{-- Asignación de Caja/Máquina (para Recepcionistas) --}}
+                                    <div id="editRecepField-{{ $emp->id }}" style="display: {{ $emp->job_role === 'recepcionista' ? 'block' : 'none' }}; background: #E8F5E9; padding: 1rem; border-radius: 8px; border: 1px dashed #A5D6A7; margin-bottom: 1rem;">
+                                        <label style="display: block; font-weight: 700; color: #2E7D32; margin-bottom: 4px; font-size: 0.85rem;">📋 Modificar Máquina / Caja Asignada:</label>
+                                        <input type="text" name="register_station" value="{{ $emp->register_station ?: 'Caja Principal 01' }}" style="width: 100%; padding: 8px; border: 1px solid #A5D6A7; border-radius: 6px; font-size: 0.9rem;">
+                                    </div>
+
+                                    <button type="submit" style="width: 100%; background: #3E2723; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: 700; cursor: pointer;">
+                                        Guardar Cambios
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </td>
                 </tr>
@@ -218,6 +300,31 @@ function toggleRoleAssignments() {
     const role = document.getElementById('jobRoleSelect').value;
     const waiterField = document.getElementById('waiterAssignmentField');
     const recepField = document.getElementById('receptionistAssignmentField');
+
+    if (role === 'mesero') {
+        waiterField.style.display = 'block';
+        recepField.style.display = 'none';
+    } else if (role === 'recepcionista') {
+        waiterField.style.display = 'none';
+        recepField.style.display = 'block';
+    } else {
+        waiterField.style.display = 'none';
+        recepField.style.display = 'none';
+    }
+}
+
+function openEditModal(id) {
+    document.getElementById('editModal-' + id).style.display = 'flex';
+}
+
+function closeEditModal(id) {
+    document.getElementById('editModal-' + id).style.display = 'none';
+}
+
+function toggleEditRoleAssignments(id) {
+    const role = document.getElementById('editJobRole-' + id).value;
+    const waiterField = document.getElementById('editWaiterField-' + id);
+    const recepField = document.getElementById('editRecepField-' + id);
 
     if (role === 'mesero') {
         waiterField.style.display = 'block';

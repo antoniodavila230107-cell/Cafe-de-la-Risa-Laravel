@@ -208,6 +208,16 @@
 </div>
 @endif
 
+@auth
+<div style="background: linear-gradient(135deg, #FFF8E1, #FFF3E0); border: 1px solid #FFE082; border-radius: 12px; padding: 10px 16px; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+    <span style="font-size: 1.4rem;">😂</span>
+    <div style="flex: 1;">
+        <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 800; color: #E65100; letter-spacing: 0.5px; display: block;">Chiste Corto del Día (Café de la Risa)</span>
+        <p style="font-size: 0.88rem; color: #3E2723; font-weight: 600; margin: 2px 0 0 0;">"{{ $randomJoke ?? 'Un café caliente arregla cualquier día.' }}"</p>
+    </div>
+</div>
+@endauth
+
 <div class="store-hero">
     <h2>Ordena en Línea para Recoger</h2>
     <p>Selecciona tus productos favoritos, elige tu mesa o zona de referencia y retira con tu código QR.</p>

@@ -26,7 +26,10 @@ class StoreController extends Controller
             $q->where('status', 'available');
         }])->where('active', true)->get();
 
-        return view('store.comprar', compact('categories', 'products', 'zones'));
+        $jokes = config('jokes', []);
+        $randomJoke = count($jokes) > 0 ? $jokes[array_rand($jokes)] : "Un café caliente arregla cualquier día.";
+
+        return view('store.comprar', compact('categories', 'products', 'zones', 'randomJoke'));
     }
 
     public function checkout(Request $request)

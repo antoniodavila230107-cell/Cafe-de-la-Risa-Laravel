@@ -15,8 +15,14 @@ use App\Http\Controllers\ReceptionController;
 use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 
-// Tienda Cliente
-Route::get('/', [StoreController::class, 'index'])->name('store.index');
+// Tienda Cliente / Redirección inteligente de Admin
+Route::get('/', function (\Illuminate\Http\Request $request) {
+    if (str_contains($request->getHost(), 'admin')) {
+        return redirect()->route('login');
+    }
+    return app(StoreController::class)->index();
+})->name('store.index');
+
 Route::get('/comprar', [StoreController::class, 'index'])->name('store.comprar');
 Route::post('/checkout', [StoreController::class, 'checkout'])->name('store.checkout');
 Route::get('/confirmacion/{folio}', [StoreController::class, 'confirmacion'])->name('store.confirmacion');

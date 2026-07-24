@@ -39,10 +39,6 @@
         </button>
     </form>
 
-    <div style="margin-top: 2rem; background: #FFF8E1; padding: 1rem; border-radius: 8px; border: 1px solid #FFE082; font-size: 0.85rem; color: #4E342E;">
-        <strong style="display: block; margin-bottom: 6px; color: #3E2723;">🔑 Credenciales Demostración:</strong>
-        <p>• <strong>Admin:</strong> admin@cafedelarisa.com / <code>password</code></p>
-        <p style="margin-top: 4px;">• <strong>Recepción:</strong> recepcion@cafedelarisa.com / <code>password</code></p>
-    </div>
+
 </div>
 @endsection

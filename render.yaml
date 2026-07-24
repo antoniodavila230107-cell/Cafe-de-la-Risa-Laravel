@@ -14,3 +14,7 @@ services:
         value: sqlite
       - key: DB_DATABASE
         value: /var/www/html/database/database.sqlite
+      - key: GOOGLE_CLIENT_ID
+        value: 105520060410-k9k9em48dkhdn4sm5glqsjo5narlto8a.apps.googleusercontent.com
+      - key: GOOGLE_REDIRECT_URI
+        value: https://cafe-de-la-risa.onrender.com/auth/google/callback

@@ -24,10 +24,14 @@ Route::get('/acerca', function () {
     return view('store.acerca');
 })->name('store.acerca');
 
-// Autenticación
+// Autenticación de Administración
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Autenticación de Clientes con Google
+Route::get('/auth/google', [\App\Http\Controllers\GoogleAuthController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('/auth/google/callback', [\App\Http\Controllers\GoogleAuthController::class, 'handleGoogleCallback'])->name('auth.google.callback');
 
 // Recepción y Monitor de Cocina (Requiere login con rol admin o reception)
 Route::middleware(['auth', 'role:admin,reception'])->group(function () {

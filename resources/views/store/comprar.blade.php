@@ -243,11 +243,16 @@
         </div>
 
         <form id="checkoutForm" onsubmit="processCheckout(event)">
-            <h4 style="color: var(--primary-coffee); margin-bottom: 1rem;">Datos para Recoger</h4>
+            <h4 style="color: var(--primary-coffee); margin-bottom: 0.8rem;">Datos para Recoger</h4>
+
+            <a href="{{ route('auth.google') }}" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: white; border: 1px solid #DADCE0; color: #3C4043; padding: 10px; border-radius: 8px; font-weight: 600; text-decoration: none; margin-bottom: 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.74-.06-1.28-.19-1.84H9v3.34h4.96c-.1.83-.64 2.08-1.84 2.92l2.84 2.2c1.7-1.57 2.68-3.88 2.68-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.84-2.2c-.76.53-1.78.9-3.12.9-2.38 0-4.41-1.57-5.13-3.72L.97 13.06C2.45 16 5.48 18 9 18z"/><path fill="#FBBC05" d="M3.87 10.8c-.18-.53-.28-1.1-.28-1.8s.1-1.27.28-1.8L.97 4.94C.35 6.17 0 7.55 0 9s.35 2.83.97 4.06l2.9-2.26z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0 5.48 0 2.45 2 1.07 4.94l2.9 2.26C4.6 5.15 6.62 3.58 9 3.58z"/></svg>
+                Continuar con Google
+            </a>
 
             <div style="margin-bottom: 1rem;">
                 <label style="display: block; font-weight: 600; margin-bottom: 4px; font-size: 0.9rem;">Nombre Completo *</label>
-                <input type="text" id="custName" required placeholder="Tu nombre" style="width: 100%; padding: 8px 12px; border: 1px solid #D7CCC8; border-radius: 6px;">
+                <input type="text" id="custName" required value="{{ session('google_customer_name', auth()->user()?->name) }}" placeholder="Tu nombre" style="width: 100%; padding: 8px 12px; border: 1px solid #D7CCC8; border-radius: 6px;">
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">

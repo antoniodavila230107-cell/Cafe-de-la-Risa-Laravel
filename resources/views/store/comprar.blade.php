@@ -227,7 +227,6 @@
 <div class="products-grid" id="productsGrid">
     @foreach($products as $product)
         <div class="product-card cat-{{ $product->category_id }}" data-name="{{ strtolower($product->name) }}">
-            <span class="stock-badge">Stock: {{ $product->stock }}</span>
             <img src="{{ asset($product->image ?: 'images/cafe-risa-logo-principal.png') }}" alt="{{ $product->name }}" class="product-img" onerror="this.src='{{ asset('images/cafe-risa-logo-principal.png') }}'">
             
             <div class="product-info">

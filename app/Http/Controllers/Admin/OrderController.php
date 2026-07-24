@@ -17,7 +17,14 @@ class OrderController extends Controller
         }
 
         if ($request->filled('type')) {
-            $query->where('service_type', $request->type);
+            if ($request->type === 'delivery') {
+                $query->where(function($q) {
+                    $q->where('service_type', 'delivery')
+                      ->orWhereNotNull('delivery_street');
+                });
+            } else {
+                $query->where('service_type', $request->type);
+            }
         }
 
         if ($request->filled('search')) {

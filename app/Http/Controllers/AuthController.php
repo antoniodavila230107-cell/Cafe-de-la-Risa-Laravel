@@ -35,14 +35,14 @@ class AuthController extends Controller
             $user = Auth::user();
 
             if ($user->role?->name === 'admin') {
-                return redirect()->intended(route('admin.dashboard'));
+                return redirect()->route('admin.dashboard');
             }
 
             if ($user->role?->name === 'reception') {
-                return redirect()->intended(route('reception.index'));
+                return redirect()->route('reception.index');
             }
 
-            return redirect()->intended(route('store.comprar'));
+            return redirect()->route('store.comprar');
         }
 
         return back()->withErrors([
